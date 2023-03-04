@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--DTD validation-->
+<!DOCTYPE listing [
+<!ELEMENT listing (movie*)>
+<!ELEMENT movie (mtitle,genre,cast,location,price)>
+<!ELEMENT mtitle (#PCDATA)>
+<!ELEMENT genre (#PCDATA)>
+<!ELEMENT cast (#PCDATA)>
+<!ELEMENT location (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ATTLIST movie id CDATA #REQUIRED>
+]>
+<listing>
+    <movie id="1">
+        <mtitle>Pulp Fiction</mtitle>
+        <genre>Pulp</genre>
+        <cast>John Travolta, Quentin Tarantino, Samuel L. Jackson</cast>
+        <location>Multiplex</location>
+        <price>15€</price>
+    </movie>
+    <movie id="2">
+        <mtitle>The Gladiator</mtitle>
+        <genre>Historical</genre>
+        <cast>Russel Crowe, Jacquin Phoenix</cast>
+        <location>Stella</location>
+        <price>12€</price>
+    </movie>
+    <movie id="3">
+        <mtitle>The Avengers</mtitle>
+        <genre>Action</genre>
+        <cast>Robert Downey Jr, Chris Evans, Mark Ruffalo</cast>
+        <location>Aviva Stadium</location>
+        <price>8€</price>
+    </movie>
+</listing>

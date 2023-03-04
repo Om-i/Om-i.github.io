@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT listing (movie*)>
+<!ELEMENT movie (mtitle,genre,cast,location,price)>
+<!ELEMENT mtitle (#PCDATA)>
+<!ELEMENT genre (#PCDATA)>
+<!ELEMENT cast (#PCDATA)>
+<!ELEMENT location (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ATTLIST movie id ID #REQUIRED>
+

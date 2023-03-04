@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Homepage</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--IMPORT CSS-->
+        <link rel="stylesheet" href="css/index.css">
+        <!--IMPORT JAVASCRIPT & JQUERY-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="js/index.js" async></script>
+    </head>
+    <body>
+        <aside>
+            <div class="sidecontent">SIDEBAR CONTENT<br>
+                <ul>
+                    <li><a href="#">Previous</a></li>
+                    <li><a href="#">opt1</a></li>
+                    <li><a href="#">opt2</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </div>
+        </aside>
+        <div class="main-container">
+            <header>HEADER</header>
+            <nav>
+                <button onclick="location.href = 'http://www.example.com'" type="button">Previous</button>
+                <button onclick="location.href = 'http://www.example.com'" type="button">Opt1</button>
+                <button onclick="location.href = 'http://www.example.com'" type="button">Opt2</button>
+                <button onclick="location.href = 'http://www.example.com'" type="button">Next</button>
+            </nav>
+            <div class="mid">
+                <div id="static">
+                    <div id="background"></div>
+                    <section>
+                        <input id="filter" oninput="filter()" type="text" placeholder="Filter Screenings...">
+                        <br>
+                        <br>
+                        <table id="mytable"><tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Genre</th>
+                                <th>Cast</th>
+                                <th>Location</th>
+                                <th>Price</th></tr>
+                        </table>
+                        <br>
+                    </section>
+                </div>
+            </div>
+            <footer>footer</footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--IMPORT CSS-->
+        <link rel="stylesheet" href="css/index.css">
+        <!--IMPORT JAVASCRIPT & JQUERY-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="js/index.js" async></script>
+    </head>
+    <body>
+        <aside>
+            <div class="sidecontent">SIDEBAR CONTENT<br>
+                <ul>
+                    <li><a href="#">Previous</a></li>
+                    <li><a href="#">opt1</a></li>
+                    <li><a href="#">opt2</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </div>
+        </aside>
+        <div class="main-container">
+            <header>HEADER</header>
+            <nav>
+                <button onclick="location.href = 'http://www.example.com'" type="button">Previous</button>
+                <button onclick="location.href = 'http://www.example.com'" type="button">Opt1</button>
+                <button onclick="location.href = 'http://www.example.com'" type="button">Opt2</button>
+                <button onclick="location.href = 'http://www.example.com'" type="button">Next</button>
+            </nav>
+            <div class="mid">
+                <div id="dynamic">
+                    <div id="background"></div> <!-- position absolute -->
+                    <section>
+                        <img src="media/jurassicpark.jpg">
+                    </section>
+                    <section>
+                        <h2>Jurassic Park</h2>
+                        <article id="description">
+                            A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.
+                        </article>
+                    </section>
+                    <section>
+                        <video autoplay controls>
+                            <source src="media/jurassicpark.mp4" type="video/mp4">
+                            <i>Cannot display video</i>
+                        </video>
+                    </section>
+                </div>
+                <form name="booking" method="post" action="php/post2sql.php" onsubmit="return bookingValidation()">
+                    <input type="text" placeholder="Your Name" name="name" required>
+                    <input type="text" placeholder="Your Email" name="email" required>
+                    <input type="date" name="date" required>
+                    <br>
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+            <footer>footer</footer>
+        </div>
+    </body>
+</html>

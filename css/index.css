@@ -1,0 +1,179 @@
+/* 
+    Created on : 18-Feb-2023, 17:03:00
+    Author     : Bak <@student.cct.ie>
+*/
+/*
+NOTE . is for class # is for id
+*/
+
+/* movie list in home */
+#mytable, th, td{
+    background-color: darkslategray;
+    border:groove;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.column{
+    /* vh = browser window height in % */
+    /* rem = size of a large character */
+    height: calc(100vh - 4.2rem);
+    overflow:auto;
+}
+
+/* ROOT */
+html {
+    /*
+    fixed height to viewport size to allow background image to cover page
+    with no repetition 
+    */
+    height: 100vh;
+    font-family: cambria;
+    font-size: 1.5rem;
+    text-align: center;
+    color: white;
+}
+h1{
+
+}
+body{
+    display: flex; /* allows to use justify-content*/
+    background-image: url("../media/movie-background.avif");
+    background-size: cover;
+    /*margin:0;*/ /*removes borders*/
+    justify-content: center; /*centers .main-container*/
+}
+/*
+SIDEBAR
+*/
+aside{
+    position: fixed;  /* allows overlapping */
+    width: 0.33rem; /* width of the default body margin*/
+    height: calc(100vh - 0.67rem); /* max height */
+    left:0; /* moves sidebar outside default body margin */
+    overflow:hidden; /* cut text */
+    /*background-color: greenyellow;*/ /*invisible*/
+    z-index:1;
+}
+.sidecontent{
+    display: none; /* hide side content by default */
+}
+aside:hover > .sidecontent{
+    display: block; /* display side content when hovering sidebar */
+    height: 100vh; /* display background along the screen height */
+    background-color: darkolivegreen;
+}
+.sidecontent ul {
+    /*    display: flex;
+        justify-content: space-between;*/
+    text-align: left;
+}
+ul{
+    padding: 1rem; /*removes list indentation*/
+    list-style: none; /*removes bullet points*/
+    font-weight: bold;
+}
+li a{
+    text-decoration: none; /*removes underline from links*/
+}
+
+/*
+MAIN
+*/
+.main-container{
+    width: calc(100% - 6rem);
+}
+
+/*
+HEADER
+*/
+header
+{
+    background-color: darkslategray;
+    font-size: 2rem;
+}
+
+/*
+MID
+*/
+.mid{
+    /*background-color: green;*/
+}
+
+/*
+Absolute positioning requires parent to be declared non-static.
+This can be done by declaring the parent position relative
+https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
+*/
+#background{
+    /*overflow:auto;*/
+    position:absolute; /* see note above */
+    height: 100%; /* required for empty div */
+    width: 100%; /* required for empty div */
+    background-image: url("../media/jurassicpark.jpg");
+    background-repeat: no-repeat;
+    filter:brightness(50%); /* darkens image, div should be empty */
+    background-size: 100%; /* stretches width to container size (height is the second parameter, default is auto) */
+    z-index: -1;
+}
+/* TABLE PAGE SPECIFIC STYLES */
+#static{
+    position: relative; /* required for background absolute positioning*/
+}
+#static>section{
+    max-width: 100%;
+    overflow-x:auto; /* enable horizontal scroll if necessary*/
+}
+
+/* MOVIE PAGE SPECIFIC STYLES */
+#dynamic{
+    display: flex;
+    align-items: center; /* center vertical alignment */
+    position: relative; /* required for background absolute positioning*/
+}
+#dynamic > section{
+    /*top:0;*/
+    /*max-width: calc(100% / 3); it's just 33.33%*/
+    object-fit:scale-down;
+}
+img{
+    max-width: 100%;
+}
+article{
+    text-align: justify;
+    max-width: 100%
+}
+video{
+    max-width: 100%;
+}
+/*
+FOOTER
+*/
+footer{
+    background-color: darkslategray;
+}
+/*
+   RESPONSIVE DESIGN
+*/
+@media (max-width: 700px) {
+    .main-container {
+        width:100%;
+    }
+}
+@media (max-width: 560px) {
+    #mytable, #description{
+        font-size: 3.5vw;
+    }
+    #dynamic{
+        display:block;
+    }
+    #dynamic > section{
+        max-width: 100%;
+    }
+    section > img{
+        display: none;
+    }
+    #description{
+        padding-top: 4rem;
+    }
+}
