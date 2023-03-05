@@ -5,22 +5,6 @@
 /*
 NOTE . is for class # is for id
 */
-
-/* movie list in home */
-#mytable, th, td{
-    background-color: darkslategray;
-    border:groove;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.column{
-    /* vh = browser window height in % */
-    /* rem = size of a large character */
-    height: calc(100vh - 4.2rem);
-    overflow:auto;
-}
-
 /* ROOT */
 html {
     /*
@@ -29,19 +13,19 @@ html {
     */
     height: 100vh;
     font-family: cambria;
-    font-size: 1.5rem;
-    text-align: center;
+    /*font-size: 1.5rem;*/
+    /*text-align: center;*/
     color: white;
 }
 h1{
 
 }
 body{
-    display: flex; /* allows to use justify-content*/
-    background-image: url("../media/movie-background.avif");
+    display: flex; /* adapts content to viewport, plus allows to use justify-content */
+    background-image: url("https://i.imgur.com/JYQBHvb.jpeg");
     background-size: cover;
     /*margin:0;*/ /*removes borders*/
-    justify-content: center; /*centers .main-container*/
+    justify-content: center; /*centers children (.main-container), requires flex*/
 }
 /*
 SIDEBAR
@@ -60,12 +44,10 @@ aside{
 }
 aside:hover > .sidecontent{
     display: block; /* display side content when hovering sidebar */
-    height: 100vh; /* display background along the screen height */
+    height: 100vh; /* display background color along the screen height */
     background-color: darkolivegreen;
 }
 .sidecontent ul {
-    /*    display: flex;
-        justify-content: space-between;*/
     text-align: left;
 }
 ul{
@@ -81,7 +63,9 @@ li a{
 MAIN
 */
 .main-container{
-    width: calc(100% - 6rem);
+    width: 60rem; 
+    /*margin:auto;*/
+    /*width: calc(100% - 6rem);*/
 }
 
 /*
@@ -94,13 +78,6 @@ header
 }
 
 /*
-MID
-*/
-.mid{
-    /*background-color: green;*/
-}
-
-/*
 Absolute positioning requires parent to be declared non-static.
 This can be done by declaring the parent position relative
 https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
@@ -110,65 +87,86 @@ https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
     position:absolute; /* see note above */
     height: 100%; /* required for empty div */
     width: 100%; /* required for empty div */
-    background-image: url("../media/jurassicpark.jpg");
+    background-image: url("https://i.imgur.com/jvOBuje.jpg");
     background-repeat: no-repeat;
     filter:brightness(50%); /* darkens image, div should be empty */
     background-size: 100%; /* stretches width to container size (height is the second parameter, default is auto) */
-    z-index: -1;
+    z-index: -1; /* place behind */
 }
-/* TABLE PAGE SPECIFIC STYLES */
+/*
+INDEX CONTENT
+*/
 #static{
-    position: relative; /* required for background absolute positioning*/
+    position: relative; /* required for background absolute positioning */
 }
 #static>section{
     max-width: 100%;
-    overflow-x:auto; /* enable horizontal scroll if necessary*/
+    overflow-x:auto; /* enable horizontal scroll if necessary */
 }
 
-/* MOVIE PAGE SPECIFIC STYLES */
+#mytable{
+    margin:auto;
+    background-color: darkslategray;
+}
+th, td{
+    border:groove;
+    text-align: justify;
+}
+/*
+MOVIE PAGE CONTENT
+*/
 #dynamic{
-    display: flex;
-    align-items: center; /* center vertical alignment */
-    position: relative; /* required for background absolute positioning*/
+    display: grid;
+    /*grid-template-columns: auto auto;*/
+    position: relative; /* required for background absolute positioning */
 }
-#dynamic > section{
-    /*top:0;*/
-    /*max-width: calc(100% / 3); it's just 33.33%*/
-    object-fit:scale-down;
-}
+/* reserved for grid tweaks on sections */
+#dynamic section:nth-of-type(1){grid-row: 1/3;}
+#dynamic section:nth-of-type(2){}
+#dynamic section:nth-of-type(3){}
+#dynamic section:nth-of-type(4){grid-column: 1/3;} 
+
 img{
     max-width: 100%;
+    /*note: img are inline elements 
+    and they dont touch the bottom of the container*/
+    vertical-align:sub; /* REMOVES DESCENDER SPACE*/
 }
 article{
     text-align: justify;
-    max-width: 100%
 }
-video{
-    max-width: 100%;
+/*
+iframe section, responsive
+*/
+#iframe-container{
+    position:relative;
+    width: 100%;
+    padding-top: 56.25%; /* that's 16/9 ratio */
+}
+iframe{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
 }
 /*
 FOOTER
 */
+#booking{
+}
 footer{
     background-color: darkslategray;
 }
 /*
    RESPONSIVE DESIGN
 */
-@media (max-width: 700px) {
-    .main-container {
-        width:100%;
-    }
-}
 @media (max-width: 560px) {
     #mytable, #description{
-        font-size: 3.5vw;
+        font-size: 3.5vw; /*text size proportional to viewport width*/
     }
     #dynamic{
         display:block;
-    }
-    #dynamic > section{
-        max-width: 100%;
     }
     section > img{
         display: none;
@@ -177,3 +175,21 @@ footer{
         padding-top: 4rem;
     }
 }
+
+/*.column{
+     vh = browser window height in % 
+     rem = size of a large character 
+    height: calc(100vh - 4.2rem);
+    overflow:auto;
+}*/
+/*#dynamic > section{
+
+    top:0;
+    max-width: calc(100% / 3); it's just 33.33%
+    object-fit:scale-down;
+}*/
+/*@media (max-width: 975px) {
+    .main-container {
+        width:100%;
+    }
+}*/

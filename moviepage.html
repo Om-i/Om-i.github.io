@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Movie Page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--IMPORT CSS-->
@@ -15,25 +15,22 @@
             <div class="sidecontent">SIDEBAR CONTENT<br>
                 <ul>
                     <li><a href="#">Previous</a></li>
-                    <li><a href="#">opt1</a></li>
-                    <li><a href="#">opt2</a></li>
+                    <li><a href="index.html">opt1</a></li>
                     <li><a href="#">Next</a></li>
                 </ul>
             </div>
         </aside>
         <div class="main-container">
-            <header>HEADER</header>
+            <header>Movie Page</header>
             <nav>
-                <button onclick="location.href = 'http://www.example.com'" type="button">Previous</button>
-                <button onclick="location.href = 'http://www.example.com'" type="button">Opt1</button>
-                <button onclick="location.href = 'http://www.example.com'" type="button">Opt2</button>
-                <button onclick="location.href = 'http://www.example.com'" type="button">Next</button>
+                <button onclick="location.href = '#'" type="button">Previous</button>
+                <button onclick="location.href = 'index.html'" type="button">Opt1</button>
+                <button onclick="location.href = '#'" type="button">Next</button>
             </nav>
-            <div class="mid">
                 <div id="dynamic">
                     <div id="background"></div> <!-- position absolute -->
                     <section>
-                        <img src="media/jurassicpark.jpg">
+                        <img src="https://i.imgur.com/jvOBuje.jpg">
                     </section>
                     <section>
                         <h2>Jurassic Park</h2>
@@ -41,22 +38,26 @@
                             A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.
                         </article>
                     </section>
+                    <section id="iframe-container">
+                        <iframe
+                            src="https://www.youtube.com/embed/lc0UehYemQA?autoplay=1&mute=1&modestbranding=1&iv_load_policy=3"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </section>
                     <section>
-                        <video autoplay controls>
-                            <source src="media/jurassicpark.mp4" type="video/mp4">
-                            <i>Cannot display video</i>
-                        </video>
+                        <form name="booking" method="post" action="php/post2sql.php" onsubmit="return bookingValidation()">
+                            <input type="text" placeholder="Your Name" name="name" required>
+                            <input type="text" placeholder="Your Email" name="email" required>
+                            <input type="date" name="date" required>
+                            <br>
+                            <button type="submit">Book Now</button>
+                        </form>
                     </section>
                 </div>
-                <form name="booking" method="post" action="php/post2sql.php" onsubmit="return bookingValidation()">
-                    <input type="text" placeholder="Your Name" name="name" required>
-                    <input type="text" placeholder="Your Email" name="email" required>
-                    <input type="date" name="date" required>
-                    <br>
-                    <button type="submit">Book Now</button>
-                </form>
-            </div>
-            <footer>footer</footer>
+            <footer>FOOTER</footer>
         </div>
     </body>
 </html>
