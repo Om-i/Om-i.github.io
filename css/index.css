@@ -45,7 +45,7 @@ aside{
 aside:hover > .sidecontent{
     display: block; /* display side content when hovering sidebar */
     height: 100vh; /* display background color along the screen height */
-    background-color: darkolivegreen;
+    background-color: darkslategray;
 }
 .sidecontent ul {
     text-align: left;
@@ -54,6 +54,7 @@ ul{
     padding: 1rem; /*removes list indentation*/
     list-style: none; /*removes bullet points*/
     font-weight: bold;
+    color: greenyellow;
 }
 li a{
     text-decoration: none; /*removes underline from links*/

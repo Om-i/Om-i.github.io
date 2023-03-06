@@ -27,7 +27,7 @@ $(document).ready(function () {
      * sidebar slide animation
      */
     $("aside").hover(function () {
-        $(this).stop().animate({width: rem2px(6)});
+        $(this).stop().animate({width: rem2px(12)});
 //        $(".sidecontent").show(); // done in css
     }, function () {
         $(this).stop().width(rem2px(0.33));
