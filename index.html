@@ -15,24 +15,20 @@
         <aside>
             <div class="sidecontent">SIDEBAR CONTENT<br>
                 <ul>
-                    <li><a href="#">Previous</a></li>
-                    <li><a href="moviepage.html">Movie Page</a></li>
-                    <li><a href="#">Next</a></li>
+                    <li><a href="moviepage.html">Go to Movie Page</a></li>
                 </ul>
             </div>
         </aside>
         <div class="main-container">
             <header>managed via imports.js</header>
             <nav>
-                <button onclick="location.href = 'http://www.example.com'" type="button">Previous</button>
-                <button onclick="location.href = 'moviepage.html'" type="button">Movie Page</button>
-                <button onclick="location.href = 'http://www.example.com'" type="button">Next</button>
+                <button onclick="location.href = 'moviepage.html'" type="button">Go to Movie Page</button>
             </nav>
                 <div id="static">
-                    <div id="background"></div>
+                    <div class="background"></div>
                     <section>
-                        <input id="filter" oninput="filter()" type="text" placeholder="Filter Screenings...">
                         <br>
+                        <input id="filter" oninput="filter()" type="text" placeholder="Filter Screenings...">
                         <br>
                         <table id="mytable"><tr>
                                 <th>Id</th>
