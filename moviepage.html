@@ -30,13 +30,17 @@
             </nav>
             <div id="dynamic">
                 <div class="background"></div> <!-- position absolute -->
-                <section id="image-container">
+                <section>
+                    <h2><b>Jurassic Park</b></h2>
+                </section>
+                <section class="image-container">
                     <img src="https://i.imgur.com/jvOBuje.jpg">
                 </section>
                 <section>
-                    <h2>Jurassic Park</h2>
-                    <article id="description">
-                        A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.
+                    <article class="description">
+                        <b>
+                            A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.
+                        </b>
                     </article>
                 </section>
                 <section class="booking">
@@ -44,9 +48,10 @@
                     <form name="booking" method="post" action="php/post2sql.php" onsubmit="return bookingValidation()">
                         <input type="text" placeholder="Your Name" name="name" required>
                         <input type="text" placeholder="Your Email" name="email" required>
-                        <br>
-                        Date: <input type="date" name="date" required>
-                        <button type="submit">Book Now</button>
+                        <div>
+                            Date: <input type="date" name="date" required>
+                        <button type="submit">Book</button>
+                        </div>
                     </form>
                 </section>
                 <section class="iframe-container">

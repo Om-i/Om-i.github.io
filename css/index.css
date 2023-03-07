@@ -5,14 +5,25 @@
 /*
 NOTE . is for class # is for id
 */
-/* ROOT */
+@font-face {
+    font-family: 'Exo';
+    src: url(https://fonts.gstatic.com/s/exo/v20/4UaZrEtFpBI4f1ZSIK9d4LjJ4lM3OwRmOw.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url(https://fonts.gstatic.com/s/josefinsans/v25/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/*
+ROOT
+*/
 html {
     /*
     fixed height to viewport size to allow background image to cover page
     with no repetition 
     */
     height: 100vh;
-    font-family: cambria;
+    font-family: 'Exo', 'Josefin Sans', Cambria, Georgia, sans-serif, Times New Roman, Times, serif;
     font-size: 1.5rem;
     text-align: center;
     color: white;
@@ -36,7 +47,7 @@ aside{
     width: 0.33rem; /* width of the default body margin*/
     height: calc(100vh - 0.67rem); /* max height */
     left:0; /* moves sidebar outside default body margin */
-    overflow: hidden;  /*cut text*/ 
+    overflow: hidden;  /*cut text*/
     /*white-space: nowrap;*/
     /*background-color: greenyellow;*/ /*invisible*/
     z-index:1;
@@ -82,21 +93,40 @@ header
     border-radius:1rem;
 }
 nav{
-/*    display:flex;
-    justify-content:space-evenly;*/
+    display:flex;
+    justify-content: space-evenly;
 }
 
 button, input{
     border-radius:1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-bottom:0.25rem;
+    padding-top:0.25rem;
     font-size: 1rem;
     margin:0.2rem;
 }
 button{
+    cursor: pointer; /*changes cursor to a hand*/
     background-color:darkslategray;
     color: white;
-    margin: 1rem;
+    /*margin: 1rem;*/
+    transition:0.5s; /*shrink animation*/
+}
+button:hover{
+    padding-right:2.5rem;
+    transition:0.5s; /*widen animation*/
+    position:relative;
+}
+button:after{
+    content:"\00a0>>"; /* \00a0 stands for non-breaking space */
+    position:absolute; /*ignore item for the button size*/
+    opacity:0;
+    transition:0.2s; /*transparency animation*/
+}
+button:hover:after{
+    opacity:1;
+    transition:0.8s; /*opacity animation*/
 }
 /*
 Absolute positioning requires parent to be declared non-static.
@@ -140,18 +170,29 @@ MOVIE PAGE CONTENT
 */
 #dynamic{
     display: grid;
+    /*gap: 1rem;*/
     /*grid-auto-columns: fit-content;*/
     /*grid-template-columns: auto auto;*/
     position: relative; /* required for background absolute positioning */
 }
 /* reserved for grid tweaks on sections */
-#dynamic section:nth-of-type(1){grid-row: 1/4;}
-/*#dynamic section:nth-of-type(2){grid-row: 1;}*/
+#dynamic section:nth-of-type(1){
+    grid-column: 1/3;
+} /*Title*/
+#dynamic section:nth-of-type(2){
+    grid-row: 2/5;
+    /*padding-left:1rem;*/
+} /*Image*/
 /*#dynamic section:nth-of-type(3){grid-row: 2;}*/
-#dynamic section:nth-of-type(4){grid-row: 3;}
+/*#dynamic section:nth-of-type(4){grid-row: 3;}*/
+/*#dynamic section:nth-of-type(5){grid-row: 4;}*/
 
+.image-container{
+    /*    display:flex;
+        align-items: end;*/
+}
 img{
-    border-radius:1rem 0 0 1rem;
+    border-radius:1rem;
     max-width: 100%;
     /*height:100%;*/
     /*note: img are inline elements 
@@ -160,11 +201,11 @@ img{
 }
 article{
     text-align: justify;
+    padding: 1rem
 }
 /*
 form
 */
-
 h4{
     margin:0;
 }
@@ -177,7 +218,7 @@ iframe section, responsive
     padding-top: 56.25%; /* that's 16/9 ratio */
 }
 iframe{
-    border-radius:0 0 1rem 0;
+    border-radius:1rem;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -187,8 +228,6 @@ iframe{
 /*
 FOOTER
 */
-#booking{
-}
 footer{
     background-image: linear-gradient(to right, rgba(255,0,0,0), darkslategray, rgba(255,0,0,0));
     border-radius:1rem;
@@ -196,9 +235,9 @@ footer{
 /*
    RESPONSIVE DESIGN
 */
-@media (max-width: 560px) {
-    #mytable, #description{
-        font-size: 3.5vw; /*text size proportional to viewport width*/
+@media (max-width: 580px) {
+    #mytable, .description, button, input{
+        font-size: 4vw; /*text size proportional to viewport width*/
     }
     #dynamic{
         display:block;
@@ -206,7 +245,7 @@ footer{
     section > img{
         display: none;
     }
-    #description{
+    .description{
         padding-top: 4rem;
     }
 }
