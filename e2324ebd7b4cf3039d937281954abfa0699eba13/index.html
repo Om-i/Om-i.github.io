@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Homepage</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--IMPORT CSS-->
+        <link rel="stylesheet" href="css/index.css">
+        <!--IMPORT JAVASCRIPT & JQUERY-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="js/script.js" async></script>
+        <script src="html/imports.js" async></script>
+    </head>
+    <body>
+        <aside>
+            <div class="sidecontent"><br>SIDEBAR CONTENT<br>
+                <ul>
+                    <li><a href="moviepage.html">Go to Movie Page</a></li>
+                </ul>
+            </div>
+        </aside>
+        <div class="main-container">
+            <header>managed via imports.js</header>
+            <nav>
+                <button onclick="location.href = 'moviepage.html'" type="button">Go to Movie Page</button>
+            </nav>
+                <div id="static">
+                    <div class="background"></div>
+                    <section>
+                        <br>
+                        <input id="filter" oninput="filter()" type="text" placeholder="Filter Screenings...">
+                        <br>
+                        <table id="mytable"><tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Genre</th>
+                                <th>Cast</th>
+                                <th>Location</th>
+                                <th>Price</th></tr>
+                        </table>
+                        <br>
+                    </section>
+                </div>
+            <footer>managed via imports.js</footer>
+        </div>
+    </body>
+</html>
