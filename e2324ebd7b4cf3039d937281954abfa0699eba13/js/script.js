@@ -2,6 +2,7 @@
 /*
  * converts rem units to current viewport pixels
  * this is because javascript doesn't accept relative units
+ * used in sidebar js
  */
 function rem2px(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -15,6 +16,7 @@ function rem2px(rem) {
  * onLoad
  */
 $(document).ready(function () {
+    $('.booking > form').hide();
     /*
      * ensures video autoplay attribute works
      * if it's still not working, check the browser's setting
@@ -27,7 +29,7 @@ $(document).ready(function () {
      * sidebar slide animation
      */
     $("aside").hover(function () {
-        $(this).stop().animate({width: rem2px(6)});
+        $(this).stop().animate({width: rem2px(6)}); // stop() halts the animation as the mouse moves away
 //        $(".sidecontent").show(); // done in css
     }, function () {
         $(this).stop().width(rem2px(0.33));
@@ -60,6 +62,32 @@ function filter() {
     });
 }
 
+/*
+ * Booking popup
+ */
+function showForm() {
+//    document.querySelector('.booking > form').style.display = "grid";
+    $('.booking > form').slideDown();
+//    document.querySelector('.booking > form').classList.add(".overlay");
+}
+/* same code in jQuery */
+//$('#bookbutton').click(function () {
+//    $('.booking > form').css({'display': 'grid'});
+//});
+/*
+ * hide booking form on click outside the window
+ */
+$(document).click(function (eventArg) {
+    var objClicked = $(eventArg.target); // clicked element
+    var div = ".booking > form"; // form selector
+    var opener = '#bookbutton'; // selector that opens the form
+    // [.closest()] returns the first ancestor of (selector) type
+    // [.length > 0] is commonly used in jquery to check if an element exists
+    if (!objClicked.closest(div).length > 0 && !objClicked.is(opener)) {
+        // if([0].nodeName!="BUTTON")
+        $(div).hide();
+    }
+});
 /*
  * HOMEPAGE JAVASCRIPT
  */
