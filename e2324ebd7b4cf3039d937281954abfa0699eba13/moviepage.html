@@ -12,24 +12,16 @@
         <script src="html/imports.js" async></script>
     </head>
     <body>
-        <aside> <!-- Sidebar appears on hover, check css -->
-            <div class="sidecontent"><br>SIDEBAR CONTENT<br>
-                <ul>
-                    <li><a href="#">Previous</a></li>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-            </div>
-        </aside>
+        <aside>stored in html/imports.html</aside>
         <div class="main-container">
-            <header>managed via imports.js</header>
+            <header>stored in html/imports.html</header>
             <nav> <!-- button tag uses javascript to use the href -->
                 <button onclick="location.href = '#'" type="button">Previous</button>
                 <button onclick="location.href = 'index.html'" type="button">Home</button>
                 <button onclick="location.href = '#'" type="button">Next</button>
             </nav>
             <div id="dynamic">
-                <div class="background"></div> <!-- position absolute -->
+                <!--<div class="background"></div>  position absolute -->
                 <section class="title">
                     <h2><b>Jurassic Park</b></h2>
                 </section>
@@ -45,18 +37,18 @@
                 </section>
                 <section class="booking">
                     <h4>Book Now!</h4>
-                    <!-- as soon as the for is submitted it will pass the input to the php file, then it will run the js function-->
+                    <!-- as soon as the form is submitted it will pass the input to the php file, then it will run the js function-->
                     <form name="booking" method="post" action="php/post2sql.php" onsubmit="return bookingValidation()">
                         <input type="text" placeholder="Your Name" name="name" required>
                         <input type="text" placeholder="Your Email" name="email" required>
                         <div> <!-- div here is used to display this content as a block -->
                             Date: <input type="date" name="date" required>
-                        <button type="submit">Book</button>
+                        <button id="bookbutton" type="submit">Book</button>
                         </div>
                     </form>
                 </section>
                 <section class="iframe-container">
-                    <!-- interaction with the youtube api is made through the url -->
+                    <!-- interaction with youtube api is made through the url -->
                     <iframe
                         src="https://www.youtube.com/embed/lc0UehYemQA?autoplay=1&mute=1&modestbranding=1&iv_load_policy=3"
                         title="YouTube video player"
@@ -66,7 +58,7 @@
                     </iframe>
                 </section>
             </div>
-            <footer>managed via imports.js</footer>
+            <footer>stored in html/imports.html</footer>
         </div>
     </body>
 </html>
