@@ -68,6 +68,8 @@ function filter() {
 function showForm() {
 //    document.querySelector('.booking > form').style.display = "grid";
     $('.booking > form').slideDown();
+    // tweak to hide overlay while loading, while i find a way to set a page loader
+    $('.booking > form').css("visibility", "visible");
 //    document.querySelector('.booking > form').classList.add(".overlay");
 }
 /* same code in jQuery */
@@ -92,39 +94,64 @@ $(document).click(function (eventArg) {
  * HOMEPAGE JAVASCRIPT
  */
 window.addEventListener("load", function () {
-    getMovieList();
+xml("xml/movielist.xml", listing);
+/* js call */
+//    getMovieList();
 });
 
-function getMovieList() {
-    var XHR = new XMLHttpRequest();
-//
-    XHR.open("GET", "xml/movielist.xml");
-    //
-    XHR.onreadystatechange = function () {
-        // if state = 4 (DONE) and response status = 200 (OK)
-        if (XHR.readyState === 4 && XHR.status === 200) {
-            // Typical action to be performed when the document is ready:
-            var xmlDoc = XHR.responseXML;
-            tableRows(xmlDoc);
-        }
-    };
-    // null parameter is optional
-    XHR.send(null);
-}
+function xml(path, action) { // function as parameter!
+                $.ajax({
+                    url: path,
+                    success: function (xml) {
+                        action(xml);
+                    }
+                });
+            }
+/* js version*/
+//function getMovieList() {
+//    var XHR = new XMLHttpRequest();
+//    XHR.open("GET", "xml/movielist.xml");
+//    //
+//    XHR.onreadystatechange = function () {
+//        // if state = 4 (DONE) and response status = 200 (OK)
+//        if (XHR.readyState === 4 && XHR.status === 200) {
+//            // Typical action to be performed when the document is ready:
+//            var xmlDoc = XHR.responseXML;
+//            tableRows(xmlDoc);
+//        }
+//    };
+//    // null parameter is optional
+//    XHR.send(null);
+//}
 
-function tableRows(xmlDoc) {
-    var entries = '';
-    var column = xmlDoc.getElementsByTagName("movie"); // or xmlDoc.querySelector("[id^='_']");
-    for (var i = 0; i < column.length; i++) {
-        entries += "<tr><td>" + column[i].id + "</td>";
-        var row = column[i].children; // column[i].childNodes; adds ancillary items
-        for (var j = 0; j < row.length; j++) {
-            entries += "<td>" + row[j].textContent + "</td>";
-        }
-        entries += "</tr>";
+function listing(xml) {
+	var string = ''; // set empty string
+	var nodes = $(xml).find('listing').children(); // set movie array
+	$(nodes).each(function() { // repeat for each movie
+            string += "<tr><td>" + $(this).attr("id") + "</td>"; // add movie id
+		$(this).children().each( function() { // repeat for every child element of movie
+			string += "<td>" + $(this).text() + '</td>'; // add text content
+            });
+            string += "</tr>"; // close table row
+        });
+//        $('#mytable').html(string); // replace table content with html string
+        $('#mytable').append(string); // add html string to table content
     }
-    document.getElementById("mytable").innerHTML += entries; // appends rows to table header
-}
+    
+/* js version */
+//function tableRows(xmlDoc) {
+//    var entries = '';
+//    var column = xmlDoc.getElementsByTagName("movie"); // or xmlDoc.querySelector("[id^='_']");
+//    for (var i = 0; i < column.length; i++) {
+//        entries += "<tr><td>" + column[i].id + "</td>";
+//        var row = column[i].children; // column[i].childNodes; adds ancillary items
+//        for (var j = 0; j < row.length; j++) {
+//            entries += "<td>" + row[j].textContent + "</td>";
+//        }
+//        entries += "</tr>";
+//    }
+//    document.getElementById("mytable").innerHTML += entries; // appends rows to table header
+//}
 
 /*
  * MOVIE PAGE JAVASCRIPT
