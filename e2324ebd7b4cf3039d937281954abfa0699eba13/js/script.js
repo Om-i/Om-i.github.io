@@ -94,19 +94,19 @@ $(document).click(function (eventArg) {
  * HOMEPAGE JAVASCRIPT
  */
 window.addEventListener("load", function () {
-xml("xml/movielist.xml", listing);
-/* js call */
+    xml("xml/movielist.xml", listing);
+    /* js call */
 //    getMovieList();
 });
 
 function xml(path, action) { // function as parameter!
-                $.ajax({
-                    url: path,
-                    success: function (xml) {
-                        action(xml);
-                    }
-                });
-            }
+    $.ajax({
+        url: path,
+        success: function (xml) {
+            action(xml);
+        }
+    });
+}
 /* js version*/
 //function getMovieList() {
 //    var XHR = new XMLHttpRequest();
@@ -125,19 +125,19 @@ function xml(path, action) { // function as parameter!
 //}
 
 function listing(xml) {
-	var string = ''; // set empty string
-	var nodes = $(xml).find('listing').children(); // set movie array
-	$(nodes).each(function() { // repeat for each movie
-            string += "<tr><td>" + $(this).attr("id") + "</td>"; // add movie id
-		$(this).children().each( function() { // repeat for every child element of movie
-			string += "<td>" + $(this).text() + '</td>'; // add text content
-            });
-            string += "</tr>"; // close table row
+    var string = ''; // set empty string
+    var nodes = $(xml).find('listing').children(); // set movie array
+    $(nodes).each(function () { // repeat for each movie
+        string += "<tr onclick=location='moviepage.html#" + $(this).attr("id") + "';>"; //><td>" + $(this).attr("id") + "</td>"; // add movie id
+        $(this).children().each(function () { // repeat for every child element of movie
+            string += "<td>" + $(this).text() + '</td>'; // add text content
         });
+        string += "</tr>"; // close table row
+    });
 //        $('#mytable').html(string); // replace table content with html string
-        $('#mytable').append(string); // add html string to table content
-    }
-    
+    $('#mytable').append(string); // add html string to table content
+}
+
 /* js version */
 //function tableRows(xmlDoc) {
 //    var entries = '';

@@ -1,13 +1,13 @@
 <?php
 
-$date  = $_POST['date'];
 $name  = $_POST['name'];
 $email = $_POST['email'];
+$date  = $_POST['date'];
 
 $servername = "localhost";
 $username   = "root";
 $password   = "";
-$dbname     = "ca";
+$dbname     = "moviewebsite";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,7 +16,7 @@ if ($conn -> connect_error) {
     die("Connection failed: " . $conn -> connect_error);
 }
 // sql instruction
-$sql = "INSERT INTO bookings VALUES ('$date', '$name', '$email')";
+$sql = "INSERT INTO booking VALUES ('$name', '$email', '$date')";
 
 //$conn -> query($sql);
 if ($conn -> query($sql) === TRUE) {

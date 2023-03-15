@@ -16,9 +16,9 @@
         <div class="main-container">
             <header>stored in html/imports.html</header>
             <nav> <!-- button tag uses javascript to use the href -->
-                <button onclick="location.href = '#'" type="button">Previous</button>
+                <button onclick="changeHash(-1);" type="button">Previous</button>
                 <button onclick="location.href = 'index.html'" type="button">Home</button>
-                <button onclick="location.href = '#'" type="button">Next</button>
+                <button onclick="changeHash(1);" type="button">Next</button>
             </nav>
             <div class="dynamic">
                 <!--<div class="background"></div>  position absolute -->
@@ -28,13 +28,13 @@
                 <section class="image-container">
                     <img src="https://i.imgur.com/jvOBuje.jpg">
                 </section>
-                <section>
+                <section> 
                     <article class="description">
                         <b>
                             A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.
                         </b>
                     </article>
-                </section>
+                </section> 
                 <section class="booking">
                     <h4><button id="bookbutton" onclick="showForm()">BOOK NOW!</button></h4>
                     <!-- as soon as the form is submitted it will pass the input to the php file, then it will run the js function-->
@@ -61,5 +61,96 @@
             </div>
             <footer>stored in html/imports.html</footer>
         </div>
+        <script>
+
+//alert(window.location.hash);
+//top.location.hash = 1;
+//parent.location.hash = 1;
+//window.location.hash = 1;
+//location.hash = 1; // equals window.location.hash
+//alert(location.pathname)
+            /*
+             * URL HASHES
+             * do not require a page refresh
+             */
+            function changeHash(offset=1) {         // parameter is set to 1 by default if not specified (not required)
+                var x = +location.hash.substring(1); // get the hash and remove the # symbol, the leading '+' converts the string to an integer
+                if (isNaN(x)) {
+                    return location.hash = 1;        // if the hash is not a number, set the hash to 1 and exit the function
+                }
+                location.hash = x + offset;          // move to the new hash in accordance with the offset
+            }
+
+
+
+
+
+
+
+
+
+
+            /*
+             * QUERY STRING JS
+             */
+            function getId() {
+                return new URL(window.location).searchParams.get("id");
+            }
+
+            function changeId(offset = 0) {              // default paremeter value, to avoid NaN output
+                var url = new URL(window.location);
+                var id = +url.searchParams.get("id");  // id is a string, leading '+' converts it to integer
+                url.searchParams.set("id", id + offset);
+                return url.href;
+            }
+
+//                if (id === undefined && !!getId) { // .get returns null if no id is present
+//
+//                }
+
+
+
+
+
+
+
+
+            /*
+             * XML JQUERY
+             */
+//            var title;
+//            var description;
+//            var image;
+//            var video;
+
+            /*
+             * function xml()
+             * Imports the xml document and allows to pass it as parameter to any function.
+             */
+            function xml(path, functionPassedAsParameter, id, tag, selector) {
+                $.ajax({ // see specification on https://api.jquery.com/jquery.ajax/
+                    url: path,
+                    success: function (xml) {
+                        functionPassedAsParameter(xml, id, tag, selector);
+                    }
+                });
+            }
+            /*
+             * function loadData() is a xml parsing function.
+             * Populates the selected container with the xml element relative to the movie id.
+             */
+            function loadData(xml, id, tag, selector) {
+                var content = $(xml).find(tag).eq(id - 1).text(); // .eq() is a 0-based index
+                $(selector).html(content); // replaces content
+//                $(selector).append(content); // adds to the present content
+            }
+            
+            /*
+             * XML TEST
+             * @args:
+             * (xml path, retrieval function type, movie index, movie entry, html container to fill)
+             */
+//            xml('xml/movielist2.xml', loadData, 1, 'mtitle', '.title h2 b');
+        </script>
     </body>
 </html>
