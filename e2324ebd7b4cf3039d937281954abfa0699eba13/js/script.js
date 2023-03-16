@@ -1,13 +1,11 @@
 
 /*
- * converts rem units to current viewport pixels
- * this is because javascript doesn't accept relative units
- * used in sidebar js
+ * converts rem units to current viewport pixels since javascript doesn't accept relative units.
+ * Used in sidebar js.
  */
 function rem2px(rem) {
     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
-;
 
 /*
  * JQUERY
@@ -17,6 +15,13 @@ function rem2px(rem) {
  */
 $(document).ready(function () {
     $('.booking > form').hide();
+    $('caption').hide();
+    /*
+     * Populates the dropdown menu with the table header elements
+     */
+    $("#rowheader > th").each(function () {
+        $("#dropdown").append("<option>" + $(this).text() + "</option>");
+    });
     /*
      * ensures video autoplay attribute works
      * if it's still not working, check the browser's setting
@@ -51,19 +56,36 @@ function filter() {
     /*
      * Case Insensitive
      */
-    var input = $("#filter").val().toLowerCase();
-    $("#mytable tr:has(td)").each(function () {
-        var row = $(this).text().toLowerCase();
-        if (row.search(input) === -1) {
-            $(this).slideUp();
+    var index = $('th:contains(' + $("option:selected").val() + ')').index(); // Index of the table header element that corresponds to the dropdown selection
+    var input = $(".filter").val().toLowerCase(); // take the input value, parse it lowercase
+    $('#mytable tr:has(td)').each(function () { // select all table rows that contain a td tag (no header) and loop through them
+//        var row = $(this).text().toLowerCase(); // take the table row, parse it as lowercase string of text
+        var row = $(this).children().eq(index).text().toLowerCase();
+        if (row.search(input) === -1) { // if row doesn't return any index in accordance to the input (defaults to -1)
+            $(this).fadeOut("fast");  // hide with slide effect
         } else {
-            $(this).slideDown();
+            $(this).fadeIn("fast"); // show with slide effect
         }
     });
+
+    /*
+     * After applying the filter, wait till the fade animation ends and check if
+     * there are any entries remaining.
+     */
+    setTimeout(function () {
+        if (!$('td').is(":visible")) { // if no table data is visible
+            $('caption').fadeIn("fast"); // show table label "no Results"
+            $('th').fadeOut("fast"); // hide table header
+        } else {
+            $('caption').hide();
+            $('th').show();
+        }
+    }, 300);
 }
 
+
 /*
- * Booking popup
+ * Booking overlay
  */
 function showForm() {
 //    document.querySelector('.booking > form').style.display = "grid";
@@ -79,15 +101,15 @@ function showForm() {
 /*
  * hide booking form on click outside the window
  */
-$(document).click(function (eventArg) {
-    var objClicked = $(eventArg.target); // clicked element
-    var div = ".booking > form"; // form selector
-    var opener = '#bookbutton'; // selector that opens the form
+$(document).click(function (eventObj) { // .click() parameter is a function that passes an Event Object
+    var clicked = $(eventObj.target); // the target of the event object is the clicked element
+    var form = ".booking > form"; // form selector
+    var opener = '#bookbutton'; // the button that opens the form
     // [.closest()] returns the first ancestor of (selector) type
     // [.length > 0] is commonly used in jquery to check if an element exists
-    if (!objClicked.closest(div).length > 0 && !objClicked.is(opener)) {
+    if (clicked.closest(form).length == 0 && !clicked.is(opener)) { //
         // if([0].nodeName!="BUTTON")
-        $(div).hide();
+        $(form).hide();
     }
 });
 /*
@@ -128,7 +150,7 @@ function listing(xml) {
     var string = ''; // set empty string
     var nodes = $(xml).find('listing').children(); // set movie array
     $(nodes).each(function () { // repeat for each movie
-        string += "<tr onclick=location='moviepage.html#" + $(this).attr("id") + "';>"; //><td>" + $(this).attr("id") + "</td>"; // add movie id
+        string += "<tr onclick=location='moviepage.html#" + $(this).attr("id") + "';>"; // create a link on top of the whole row 
         $(this).children().each(function () { // repeat for every child element of movie
             string += "<td>" + $(this).text() + '</td>'; // add text content
         });

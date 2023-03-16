@@ -12,9 +12,7 @@ NOTE
 /*
 Hidden class will be used to manage dynamic content
 */
-.hidden {
-    display: none !important;
-}
+.hidden {display: none !important;}
 /*
 Font Import
 */
@@ -27,9 +25,7 @@ h2{
     padding-top: 0.5rem;
     margin-top: 0;
 }
-h4{
-    margin:0;
-}
+h4{margin:0;}
 /*
 ROOT
 */
@@ -65,21 +61,17 @@ aside{
     background-color: rgba(0,0,0,0); /*invisible, not required*/
     z-index:1;
 }
-.sidecontent{
-    display: none; /* hide content when sidebar is closed */
-}
+.sidecontent{display: none;} /* hide content when sidebar is closed */
 aside:hover > .sidecontent{
     display: block; /* display side content when hovering sidebar */
     height: 100vh; /* display background color along the screen height */
     background-color: darkslategray;
 }
-.sidecontent > ul {
-    text-align: left;
-}
+.sidecontent > ul {text-align: left;}
 ul{
     padding: 1rem; /*removes list indentation*/
     list-style: none; /*removes bullet points*/
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 li > a{
     /*text-decoration: none;*/ /*removes underline from links*/
@@ -99,12 +91,10 @@ MAIN
 /*
 HEADER
 */
-header
-{
+header{font-size: 2rem;}
+header, footer{
     /* -> transparent to color to transparent*/
-    background-image: linear-gradient(to right, rgba(255,0,0,0), darkslategray, rgba(255,0,0,0));
-    font-size: 2rem;
-    border-radius:1rem;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), darkslategray, rgba(0,0,0,0));
 }
 nav{
     display:flex;
@@ -113,8 +103,7 @@ nav{
     margin-bottom:0.5rem;
 }
 
-button, input{
-    border-radius:1rem;
+button, input, select{
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom:0.25rem;
@@ -122,13 +111,17 @@ button, input{
     font-size: 1rem;
     /*margin:0.2rem;*/
 }
+input{
+    border-radius: 1rem;
+}
 button{
+    border-radius:1rem;
     cursor: pointer; /*changes cursor to a hand*/
     background-color:darkslategray;
     color: white;
     /*margin: 1rem;*/
     transition:0.5s; /*shrink button animation*/
-    overflow:hidden; /* confines shiny animation */
+    overflow:hidden;  /*confines shiny animation*/ 
     position:relative; /* for absolute positioning of the shiny animation */
 }
 button:hover{
@@ -150,29 +143,34 @@ button:hover:after{
 #bookbutton:before {
     position: absolute; /* overlap parent */
     content: ''; /* create container */
-    top: -3rem; /* vertical repositioning */
+    top: -1rem; /* vertical repositioning */
     left: -1rem; /* horizontal repositioning */
-    width: 50%;
-    height: 100%;
+    width: 25%;
+    height: 50%;
     background-color: white;
-    animation: shiny 3s infinite; /* keyframe call */
+    animation: shiny 2.5s infinite; /* keyframe call */
 }
 /* Animation (made in 3 stages to speed it up) */
-@keyframes shiny {
-    from { /* time=0 */
-    }
-    90% { /* frame positioning */
-        transform: rotate(-45deg); /* rotate counterclockwise */
+@keyframes shiny {from { /* time=0 */}
+    85% { /* frame positioning */
+        transform: rotate(-30deg); /* rotate counterclockwise */
         opacity: 1; /* keep its opacity to 1 */
     }
     to { /* frame trigger */
-        transform: rotate(-45deg) scale(15);
+        transform: rotate(-30deg) scale(18);
         opacity: 0;
     }
 }
 
 /*
 INDEX CONTENT
+*/
+/*#static > section{
+    max-width: 100%;
+    overflow-x:auto;  enable horizontal scroll if necessary 
+}*/
+/*
+MOVIE PAGE CONTENT
 */
 /*
 Absolute positioning requires parent to be declared non-static.
@@ -193,14 +191,6 @@ https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
     background-size: 100%; /* stretch width to container size (height is the second parameter, default is auto) */
     z-index: -1; /* place behind */
 }
-/*#static > section{
-    max-width: 100%;
-    overflow-x:auto;  enable horizontal scroll if necessary 
-}*/
-
-/*
-MOVIE PAGE CONTENT
-*/
 .dynamic{
     display: grid;
     /*gap: 1rem;*/
@@ -216,7 +206,11 @@ MOVIE PAGE CONTENT
     grid-row: 2/5; /* height extension (3) of the second section (image) */
 }
 
-/* Listing table */
+/* Listing */
+.filter{
+    margin-top:1rem;
+    margin-bottom:1rem;
+}
 #mytable{
     overflow: auto;
     margin:auto;
@@ -239,15 +233,11 @@ th, td{
     padding:0.25rem;
     border:groove;
 }
-th{
-    text-align:center;
-}
+th{text-align:center;}
 th:first-child{border-radius: 0.85rem 0 0 0;}
 th:last-child{border-radius:0 0.85rem 0 0;}
 
-td{
-    text-align: justify;
-}
+td{text-align: justify;}
 tr:last-child > td:first-child{border-radius:0 0 0 0.85rem;}
 tr:last-child > td:last-child{border-radius:0 0 0.85rem 0;}
 
@@ -261,7 +251,7 @@ img{
     max-width: 100%; /* prevents the image to show in its natural size */
     /*height:100%;*/
     /*note: img are inline elements and they dont touch the bottom of the container*/
-    /*vertical-align:sub;  REMOVES DESCENDER SPACE*/
+    /*vertical-align:sub; */ /* REMOVES DESCENDER SPACE*/
 }
 article{
     text-align: justify;
@@ -270,12 +260,13 @@ article{
 /*
 booking section
 */
+.booking{padding:1rem;}
 .booking > form{
     visibility: hidden; /* small tweak while i figure out a page loader */
     display:grid;
     padding: 1rem;
     gap:1rem; /* spacing between grid elements */
-    /*    grid-template-columns: 35%;*/
+    /* grid-template-columns: 35%;*/
     align-items:center;
     position:fixed; /* position relative to root instead of parent */
     width:75vw;
@@ -288,15 +279,9 @@ booking section
     border-color: darkslategray;
     z-index:1;
 }
-.booking > form > *:nth-child(1){
-    width:7rem;
-}
-.booking > form > *:nth-child(2){
-    width:7rem;
-}
-.booking > form > *:nth-child(3){
-    width:7rem;
-}
+.booking > form > *:nth-child(1){width:7rem;}
+.booking > form > *:nth-child(2){width:7rem;}
+.booking > form > *:nth-child(3){width:7rem;}
 .booking > form > *:nth-child(5){
     /*min-width:6rem;*/
     grid-column: 2; /* place element in the right column */
@@ -311,40 +296,26 @@ iframe section, responsive
     padding-top: 56.25%; /* that's 16/9 ratio */
 }
 iframe{
-    border-radius:1rem;
+    border-radius: 0 0 1rem 1rem;
     position: absolute; /*out of flow*/
     left: 0;
     bottom: 0;
     width: 100%;
     height: 100%;
 }
-/*
-FOOTER
-*/
-footer{
-    background-image: linear-gradient(to right, rgba(255,0,0,0), darkslategray, rgba(255,0,0,0));
-    border-radius:1rem;
-}
+
 /*
    RESPONSIVE DESIGN
 */
-@media (max-width: 514px) {
-    #mytable, .description, button, input{
-        font-size: 4vw; /*text size proportional to viewport width*/
-    }
-    .booking > form > *:nth-child(5){
-        grid-column:1;
-    }
+@media (max-width: 590px) {
+    #mytable, .description, button, input, select{font-size: 3.5vw;} /*text size proportional to viewport width*/
+    .booking > form > *:nth-child(5){grid-column:1;}
     .dynamic{
         display:block;
         margin-top: 0;
     }
-    .image-container{
-        display: none;
-    }
-    .description{
-        padding-top: 4rem;
-    }
+    .image-container{display: none;}
+    .description{padding-top: 4rem;}
 }
 
 /*.column{
@@ -360,7 +331,5 @@ footer{
     object-fit:scale-down;
 }*/
 /*@media (max-width: 975px) {
-    .main-container {
-        width:100%;
-    }
+    .main-container {width:100%;}
 }*/

@@ -9,22 +9,22 @@
         <!--IMPORT JAVASCRIPT & JQUERY-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <script src="js/script.js" async></script>
+        <!--IMPORT EXTERNAL HTML (HEADER, SIDEBAR, FOOTER)-->
         <script src="html/imports.js" async></script>
     </head>
     <body>
-        <aside>stored in html/imports.html</aside>
+        <aside>html/imports.html</aside>
         <div class="main-container">
-            <header>stored in html/imports.html</header>
+            <header>html/imports.html</header>
             <nav>
-                <button onclick="location.href = 'moviepage.html'" type="button">Go to Movie Page</button>
+                <button onclick="location.href = 'moviepage.html#1'" type="button">Go to Movie Page</button>
             </nav>
             <div class="dynamic">
-                <!--<div class="background"></div>-->
                 <section>
-                    <br>
-                    <input id="filter" oninput="filter()" type="text" placeholder="Filter Screenings...">
-                    <br>
+                    <input class="filter" oninput="filter()" type="text" placeholder="Filter Screenings by...">
+                    <select id="dropdown"></select>
                     <table id="mytable">
+                        <caption style="font-size: 1.25rem;font-style: italic;">No results</caption>
                             <tr id='rowheader'>
                                 <th>Title</th>
                                 <th>Genre</th>
@@ -36,7 +36,7 @@
                     <br>
                 </section>
             </div>
-            <footer>stored in html/imports.html</footer>
+            <footer>html/imports.html</footer>
         </div>
     </body>
 </html>
