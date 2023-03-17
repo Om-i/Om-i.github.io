@@ -303,6 +303,7 @@ iframe section, responsive
     top:-45%;
 }
 iframe{
+    border:none;
     border-radius: 0 0 1rem 1rem;
     position: absolute; /*out of flow*/
     left: 0;

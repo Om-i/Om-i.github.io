@@ -1,1 +1,5 @@
 # AddType application/x-httpd-php .html
+
+#<IfModule mod_headers.c>
+#	Header set Content-Security-Policy "iframe-ancestors https://www.youtube.com"
+#</IfModule>
