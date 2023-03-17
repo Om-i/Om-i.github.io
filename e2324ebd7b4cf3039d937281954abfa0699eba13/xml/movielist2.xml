@@ -19,23 +19,23 @@
         <genre>Crime, Drama, Horror</genre>
         <cast>Jackie Earle Haley, Rooney Mara, Kyle Gallner</cast>
         <location>Vue Cinema</location>
-        <price>12€</price>
+        <price>€ 12</price>
         <description>
             Teenager Nancy Thompson must uncover the dark truth concealed by her parents after she and her friends become targets of the spirit of a serial killer with a bladed glove in their dreams, in which if they die, it kills them in real life.
         </description>
-        <image>empty</image>
-        <video>empty</video>
+        <image>https://i.imgur.com/Eu1LGoT.jpg</image>
+        <video>https://www.youtube.com/watch?v=dCVh4lBfW-c</video>
     </movie>
     <movie id="2">
         <mtitle>Jurassic Park</mtitle>
         <genre>Action, Adventure, Sci-Fi</genre>
         <cast>Sam Neill, Laura Dern, Jeff Goldblum</cast>
         <location>Light House Cinema</location>
-        <price>15€</price>
+        <price>€ 15</price>
         <description>
-            The Mummy is a rousing, suspenseful and horrifying epic about an expedition of treasure-seeking explorers in the Sahara Desert in 1925. Stumbling upon an ancient tomb, the hunters unwittingly set loose a 3,000-year-old legacy of terror, which is embodied in the vengeful reincarnation of an Egyptian priest who had been sentenced to an eternity as one of the living dead.
+            A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.
         </description>
-        <image>https://i.imgur.com/JYQBHvb.jpeg</image>
+        <image>https://i.imgur.com/jvOBuje.jpg</image>
         <video>https://www.youtube.com/embed/lc0UehYemQA</video>
     </movie>
     <movie id="3">
@@ -43,23 +43,23 @@
         <genre>Action, Adventure, Fantasy</genre>
         <cast>Brendan Fraser, Rachel Weisz, John Hannah</cast>
         <location>Cineworld</location>
-        <price>10€</price>
+        <price>€ 10</price>
         <description>
-            They are the best-kept secret in the universe. Working for a highly funded yet unofficial government agency, Kay (Tommy Lee Jones) and Jay (Will Smith) are the Men in Black, providers of immigration services and regulators of all things alien on Earth. While investigating a series of unregistered close encounters, the MIB agents uncover the deadly plot of an intergalactic terrorist who is on a mission to assassinate two ambassadors from opposing galaxies currently in residence in New York City.
+            The Mummy is a rousing, suspenseful and horrifying epic about an expedition of treasure-seeking explorers in the Sahara Desert in 1925. Stumbling upon an ancient tomb, the hunters unwittingly set loose a 3,000-year-old legacy of terror, which is embodied in the vengeful reincarnation of an Egyptian priest who had been sentenced to an eternity as one of the living dead.
         </description>
-        <image>empty</image>    
-        <video>empty</video>
+        <image>https://i.imgur.com/zThEsIO.jpg</image>    
+        <video>https://www.youtube.com/watch?v=ZsDqiSP9aaQ</video>
     </movie>
     <movie id="4">
         <mtitle>Men In Black</mtitle>
         <genre>Action, Adventure, Comedy</genre>
         <cast>Tommy Lee Jones, Will Smith, Linda Fiorentino</cast>
         <location>Omniplex</location>
-        <price>8€</price>
+        <price>€ 8</price>
         <description>
-            Teenager Nancy Thompson must uncover the dark truth concealed by her parents after she and her friends become targets of the spirit of a serial killer with a bladed glove in their dreams, in which if they die, it kills them in real life.
+            They are the best-kept secret in the universe. Working for a highly funded yet unofficial government agency, Kay (Tommy Lee Jones) and Jay (Will Smith) are the Men in Black, providers of immigration services and regulators of all things alien on Earth. While investigating a series of unregistered close encounters, the MIB agents uncover the deadly plot of an intergalactic terrorist who is on a mission to assassinate two ambassadors from opposing galaxies currently in residence in New York City.
         </description>
-        <image>empty</image>
-        <video>empty</video>
+        <image>https://i.imgur.com/5Th6mJ1.jpg</image>
+        <video>https://www.youtube.com/watch?v=1Q4mhYF9aQQ</video>
     </movie>
 </listing>

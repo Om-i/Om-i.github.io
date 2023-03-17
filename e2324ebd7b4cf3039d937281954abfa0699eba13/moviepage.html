@@ -23,16 +23,14 @@
             <div class="dynamic">
                 <!--<div class="background"></div>  position absolute -->
                 <section class="title">
-                    <h2><b>Jurassic Park</b></h2>
+                    <h2><b>###</b></h2>
                 </section>
                 <section class="image-container">
-                    <img src="https://i.imgur.com/jvOBuje.jpg">
+                    <img alt="Poster">
                 </section>
                 <section> 
                     <article class="description">
-                        <b>
-                            A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.
-                        </b>
+                        <b>###</b>
                     </article>
                 </section> 
                 <section class="booking">
@@ -48,109 +46,146 @@
                         </div>
                     </form>
                 </section>
-                <section class="iframe-container">
-                    <!-- interaction with youtube api is made through the url -->
-                    <iframe
-                        src="https://www.youtube.com/embed/lc0UehYemQA?autoplay=1&mute=1&modestbranding=1&iv_load_policy=3"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-                </section>
-            </div>
-            <footer>stored in html/imports.html</footer>
-        </div>
-        <script>
+                <section class="video">
+                    <div class="iframe-container">
+                        <!-- interaction with youtube api is made through the url -->
+                        <iframe
+                            src="https://www.youtube.com/embed/lc0UehYemQA?autoplay=1&mute=1&modestbranding=1&iv_load_policy=3"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                        <div>
+                            </section>
+                        </div>
+                        <footer>stored in html/imports.html</footer>
+                    </div>
+                    <script>
+                        /*
+                         */
+                        onload = function () {
+                            changeContent();
+                        };
+                        onhashchange = function () {
+                            changeContent();
+                        };
+                        /*
+                         */
+                        function changeContent() {
+                            moviepageXml('.title h2 b', 'mtitle');
+                            moviepageXml('.description b', 'description');
+                            moviepageXml('.image-container img', 'image');
+                            moviepageXml('.iframe-container iframe', 'video');
+                        }
 
-//alert(window.location.hash);
-//top.location.hash = 1;
-//parent.location.hash = 1;
-//window.location.hash = 1;
-//location.hash = 1; // equals window.location.hash
-//alert(location.pathname)
-            /*
-             * URL HASHES
-             * do not require a page refresh
-             */
-            function changeHash(offset=1) {         // parameter is set to 1 by default if not specified (not required)
-                var x = +location.hash.substring(1); // get the hash and remove the # symbol, the leading '+' converts the string to an integer
-                if (isNaN(x)) {
-                    return location.hash = 1;        // if the hash is not a number, set the hash to 1 and exit the function
-                }
-                location.hash = x + offset;          // move to the new hash in accordance with the offset
-            }
-
-
-
-
-
-
-
-
-
-
-            /*
-             * QUERY STRING JS
-             */
-            function getId() {
-                return new URL(window.location).searchParams.get("id");
-            }
-
-            function changeId(offset = 0) {              // default paremeter value, to avoid NaN output
-                var url = new URL(window.location);
-                var id = +url.searchParams.get("id");  // id is a string, leading '+' converts it to integer
-                url.searchParams.set("id", id + offset);
-                return url.href;
-            }
-
-//                if (id === undefined && !!getId) { // .get returns null if no id is present
-//
-//                }
+                        function moviepageXml(selector, tag) {
+                            $.ajax({// see specification on https://api.jquery.com/jquery.ajax/
+                                url: 'xml/movielist2.xml',
+                                success: function (xml) {
+                                    /* start asyncronous call */
+                                    var id = +location.hash.substring(1);
+                                    var content = $(xml).find(tag).eq(id - 1).text();
+                                    var sel = $(selector);
+                                    if (sel.is('img')) {
+                                        sel.attr("src", content);
+                                    } else if (sel.is('iframe')) {
+                                        sel.attr("src", content + "?autoplay=1&mute=1&modestbranding=1&iv_load_policy=3");
+                                    } else {
+                                        sel.html(content);
+                                    }
+                                    /* end asyncronous call */
+                                }
+                            });
+                        }
 
 
+                        //alert(window.location.hash);
+                        //top.location.hash = 1;
+                        //parent.location.hash = 1;
+                        //window.location.hash = 1;
+                        //location.hash = 1; // equals window.location.hash
+                        //alert(location.pathname)
+
+
+                        /*
+                         * URL HASHES
+                         * do not require a page refresh
+                         */
+                        function changeHash(offset = 1) {         // parameter is set to 1 by default if not specified (not required)
+                            var x = +location.hash.substring(1); // get the hash and remove the # symbol, the leading '+' casts the string to an integer
+                            if (isNaN(x)) {
+                                return location.hash = 1;        // if the hash is not a number, set the hash to 1 and exit the function
+                            }
+                            location.hash = x + offset;          // move to the new hash in accordance with the offset
+                        }
 
 
 
 
 
 
-            /*
-             * XML JQUERY
-             */
-//            var title;
-//            var description;
-//            var image;
-//            var video;
 
-            /*
-             * function xml()
-             * Imports the xml document and allows to pass it as parameter to any function.
-             */
-            function xml(path, functionPassedAsParameter, id, tag, selector) {
-                $.ajax({ // see specification on https://api.jquery.com/jquery.ajax/
-                    url: path,
-                    success: function (xml) {
-                        functionPassedAsParameter(xml, id, tag, selector);
-                    }
-                });
-            }
-            /*
-             * function loadData() is a xml parsing function.
-             * Populates the selected container with the xml element relative to the movie id.
-             */
-            function loadData(xml, id, tag, selector) {
-                var content = $(xml).find(tag).eq(id - 1).text(); // .eq() is a 0-based index
-                $(selector).html(content); // replaces content
-//                $(selector).append(content); // adds to the present content
-            }
-            
-            /*
-             * XML TEST
-             * @args:
-             * (xml path, retrieval function type, movie index, movie entry, html container to fill)
-             */
-//            xml('xml/movielist2.xml', loadData, 1, 'mtitle', '.title h2 b');
-        </script>
-    </body>
-</html>
+
+
+
+                        /*
+                         * QUERY STRING JS
+                         */
+                        //            function getId() {
+                        //                return new URL(window.location).searchParams.get("id");
+                        //            }
+                        //
+                        //            function changeId(offset = 0) {              // default paremeter value, to avoid NaN output
+                        //                var url = new URL(window.location);
+                        //                var id = +url.searchParams.get("id");  // id is a string, leading '+' casts string to integer
+                        //                url.searchParams.set("id", id + offset);
+                        //                return url.href;
+                        //            }
+
+
+
+                        //                if (id === undefined && !!getId) { // .get("id") returns null if no id is present, !! casts null to false
+                        //
+                        //                }
+
+
+
+
+
+
+
+
+                        /*
+                         * XML JQUERY
+                         */
+                        //            var title;
+                        //            var description;
+                        //            var image;
+                        //            var video;
+
+                        //            /*
+                        //             * function xml()
+                        //             * Imports the xml document and allows to pass it as parameter to any function.
+                        //             */
+                        //            function xml(path, functionPassedAsParameter, tag, selector) {
+                        //                $.ajax({// see specification on https://api.jquery.com/jquery.ajax/
+                        //                    url: path,
+                        //                    success: function (xml) {
+                        //                        functionPassedAsParameter(xml, tag, selector);
+                        //                    }
+                        //                });
+                        //            }
+                        //            /*
+                        //             * function loadData() is a xml parsing function.
+                        //             * Populates the selected container with the xml element relative to the movie id.
+                        //             */
+                        //            function loadData(xml, tag, selector) {
+                        //                var id = location.hash.substring(1);
+                        //                var content = $(xml).find(tag).eq(id - 1).text(); // .eq() is a 0-based index
+                        //                $(selector).html(content); // replaces content
+                        ////                $(selector).append(content); // adds to the present content
+                        //            }
+                    </script>
+                    </body>
+                    </html>

@@ -60,11 +60,11 @@ function filter() {
     var input = $(".filter").val().toLowerCase(); // take the input value, parse it lowercase
     $('#mytable tr:has(td)').each(function () { // select all table rows that contain a td tag (no header) and loop through them
 //        var row = $(this).text().toLowerCase(); // take the table row, parse it as lowercase string of text
-        var row = $(this).children().eq(index).text().toLowerCase();
+        var row = $(this).children().eq(index).text().toLowerCase(); // table row child in (index) position, parse content lowercase
         if (row.search(input) === -1) { // if row doesn't return any index in accordance to the input (defaults to -1)
-            $(this).fadeOut("fast");  // hide with slide effect
+            $(this).fadeOut("fast");  // hide with fade effect
         } else {
-            $(this).fadeIn("fast"); // show with slide effect
+            $(this).fadeIn("fast"); // show with fade effect
         }
     });
 
@@ -75,10 +75,10 @@ function filter() {
     setTimeout(function () {
         if (!$('td').is(":visible")) { // if no table data is visible
             $('caption').fadeIn("fast"); // show table label "no Results"
-            $('th').fadeOut("fast"); // hide table header
+            $('th').hide(); // hide table header
         } else {
             $('caption').hide();
-            $('th').show();
+            $('th').fadeIn("fast");
         }
     }, 300);
 }
@@ -88,12 +88,15 @@ function filter() {
  * Booking overlay
  */
 function showForm() {
-//    document.querySelector('.booking > form').style.display = "grid";
-    $('.booking > form').slideDown();
+    $('.booking > form').slideDown(); // element is not hidden, but this animates the visibility attribute
     // tweak to hide overlay while loading, while i find a way to set a page loader
     $('.booking > form').css("visibility", "visible");
 //    document.querySelector('.booking > form').classList.add(".overlay");
 }
+/*
+ * Display form as grid
+ */
+//    document.querySelector('.booking > form').style.display = "grid";
 /* same code in jQuery */
 //$('#bookbutton').click(function () {
 //    $('.booking > form').css({'display': 'grid'});
@@ -104,10 +107,9 @@ function showForm() {
 $(document).click(function (eventObj) { // .click() parameter is a function that passes an Event Object
     var clicked = $(eventObj.target); // the target of the event object is the clicked element
     var form = ".booking > form"; // form selector
-    var opener = '#bookbutton'; // the button that opens the form
     // [.closest()] returns the first ancestor of (selector) type
     // [.length > 0] is commonly used in jquery to check if an element exists
-    if (clicked.closest(form).length == 0 && !clicked.is(opener)) { //
+    if (clicked.closest(form).length == 0 && !clicked.is('#bookbutton')) { // if the clicked element doesn't have a (form) ancestor and is not the #bookbutton
         // if([0].nodeName!="BUTTON")
         $(form).hide();
     }

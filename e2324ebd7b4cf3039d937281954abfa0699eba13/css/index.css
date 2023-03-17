@@ -290,10 +290,17 @@ booking section
 /*
 iframe section, responsive
 */
+.video{
+    overflow: hidden;
+    padding-top:12.77%; /* title height size (might need a fix) */
+    /*max-width: 100%;*/
+}
 .iframe-container{
     position:relative;
-    width: 100%;
-    padding-top: 56.25%; /* that's 16/9 ratio */
+    /*width: 100%;*/
+    height:45%;
+    padding-top: 56.25%;  /*that's 16/9 ratio*/ 
+    top:-45%;
 }
 iframe{
     border-radius: 0 0 1rem 1rem;
@@ -308,7 +315,7 @@ iframe{
    RESPONSIVE DESIGN
 */
 @media (max-width: 590px) {
-    #mytable, .description, button, input, select{font-size: 3.5vw;} /*text size proportional to viewport width*/
+    #mytable, .description, button:not(#bookbutton), input, select{font-size: 3.5vw;} /*text size proportional to viewport width*/
     .booking > form > *:nth-child(5){grid-column:1;}
     .dynamic{
         display:block;
