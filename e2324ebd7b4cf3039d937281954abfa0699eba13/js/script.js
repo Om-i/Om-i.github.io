@@ -118,7 +118,7 @@ $(document).click(function (eventObj) { // .click() parameter is a function that
  * HOMEPAGE JAVASCRIPT
  */
 window.addEventListener("load", function () {
-    xml("xml/movielist.xml", listing);
+    xml("xml/movielist2.xml", listing);
     /* js call */
 //    getMovieList();
 });
@@ -153,7 +153,8 @@ function listing(xml) {
     var nodes = $(xml).find('listing').children(); // set movie array
     $(nodes).each(function () { // repeat for each movie
         string += "<tr onclick=location='moviepage.html#" + $(this).attr("id") + "';>"; // create a link on top of the whole row 
-        $(this).children().each(function () { // repeat for every child element of movie
+//        $(this).find("[table]").each(function () { // repeat for every descendant of movie that has the [table] attribute (<mtitle table="">)
+        $(this).children().slice(0, 5).each(function () { // repeat for the first  5 children elements of movie (faster than the above)
             string += "<td>" + $(this).text() + '</td>'; // add text content
         });
         string += "</tr>"; // close table row

@@ -12,7 +12,7 @@
 ]>
 <listing>
     <movie id="1">
-        <mtitle>Pulp Fiction</mtitle>
+        <mtitle table="">Pulp Fiction</mtitle>
         <genre>Pulp</genre>
         <cast>John Travolta, Quentin Tarantino, Samuel L. Jackson</cast>
         <location>Multiplex</location>

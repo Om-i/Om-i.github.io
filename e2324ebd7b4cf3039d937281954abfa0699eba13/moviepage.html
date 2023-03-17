@@ -113,6 +113,9 @@
                          */
                         function changeHash(offset = 1) {         // parameter is set to 1 by default if not specified (not required)
                             var x = +location.hash.substring(1); // get the hash and remove the # symbol, the leading '+' casts the string to an integer
+                            if (x+offset<1||4<x+offset){ // if the result would go beyond the range of movies
+                                return; // stop function
+                            }
                             if (isNaN(x)) {
                                 return location.hash = 1;        // if the hash is not a number, set the hash to 1 and exit the function
                             }
