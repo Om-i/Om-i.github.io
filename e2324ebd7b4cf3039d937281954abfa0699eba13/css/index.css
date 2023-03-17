@@ -177,7 +177,7 @@ Absolute positioning requires parent to be declared non-static.
 This can be done by declaring the parent position relative
 https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
 */
-.dynamic:before{ /* pseudo-element, for all purposes this is a child element */
+.background{ /* pseudo-element, for all purposes this is a child element */
     content:""; /* activate pseudo-element */
     border-radius:1rem;
     /*overflow:auto;*/
@@ -185,7 +185,7 @@ https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
     left: 0; /* centers the absolute pseudo-element, cannot be done with margin:auto; */
     height: 100%; /* required for empty div */
     width: 100%; /* required for empty div */
-    background-image: url("https://i.imgur.com/jvOBuje.jpg");
+    background-image: url("https://i.imgur.com/JYQBHvb.jpeg");
     background-repeat: no-repeat;
     filter:brightness(50%); /* darken image, div should be empty */
     background-size: 100%; /* stretch width to container size (height is the second parameter, default is auto) */
@@ -199,10 +199,10 @@ https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
     position: relative; /* required for background absolute positioning */
 }
 /* reserved for grid tweaks on sections */
-.dynamic > *:nth-child(1){ /* among all elements child of the dynamic class, take the first */
+.dynamic > *:nth-child(2){ /* among all elements child of the dynamic class, take the first */
     grid-column: 1/3; /* witdh extension (2) of the first section (title) */
 }
-.dynamic > *:nth-child(2){ /* another way to say the second section */
+.dynamic > *:nth-child(3){ /* another way to say the second section */
     grid-row: 2/5; /* height extension (3) of the second section (image) */
 }
 
@@ -217,7 +217,8 @@ https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
     /*background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));*/
     background-color: rgba(0,0,0,0.5);
     /**/
-    border:groove;
+    border:ridge;
+    border-color: darkslategray;
     /*border: 1px solid silver;*/
     /*border-left-width: 0;*/
     /*border-collapse: separate;*/
@@ -231,8 +232,11 @@ tr:not(#rowheader):hover{ /* selects table rows that dont have the rowheader id 
 
 th, td{
     padding:0.25rem;
-    border:groove;
+    border:ridge;
+    border-color: darkslategray;
 }
+th + th, td + td{border-left: 0 none;} /* vertical borders are not doubled */
+
 th{text-align:center;}
 th:first-child{border-radius: 0.85rem 0 0 0;}
 th:last-child{border-radius:0 0.85rem 0 0;}
@@ -274,7 +278,8 @@ booking section
     left: 50%; /* half screen width distance */
     top: 50%; /* half screen height distance */
     transform: translate(-50%, -50%); /* move up and left half the size of the element*/
-    background-color: slategray;
+    /*background-color: slategray;*/
+    background-color: rgba(0,0,0,0.75);
     border-style: ridge;
     border-color: darkslategray;
     z-index:1;

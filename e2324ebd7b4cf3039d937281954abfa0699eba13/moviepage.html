@@ -21,7 +21,7 @@
                 <button onclick="changeHash(1);" type="button">Next</button>
             </nav>
             <div class="dynamic">
-                <!--<div class="background"></div>  position absolute -->
+                <picture class="background"></picture>
                 <section class="title">
                     <h2><b>###</b></h2>
                 </section>
@@ -50,7 +50,7 @@
                     <div class="iframe-container">
                         <!-- interaction with youtube api is made through the url -->
                         <iframe
-                            src="" allowfullscreen>
+                            src="###" allowfullscreen>
                         </iframe>
                         <div>
                             </section>
@@ -71,6 +71,7 @@
                         function changeContent() {
                             moviepageXml('.title h2 b', 'mtitle');
                             moviepageXml('.description b', 'description');
+                            moviepageXml('.background', 'image');
                             moviepageXml('.image-container img', 'image');
                             moviepageXml('.iframe-container iframe', 'video');
                         }
@@ -83,7 +84,9 @@
                                     var id = +location.hash.substring(1);
                                     var content = $(xml).find(tag).eq(id - 1).text();
                                     var sel = $(selector);
-                                    if (sel.is('img')) {
+                                    if (sel.is('.background')){
+                                        sel.css('background-image','url('+content+')');
+                                    } else if (sel.is('img')) {
                                         sel.attr("src", content);
                                     } else if (sel.is('iframe')) {
                                         sel.attr("src", content + "?autoplay=1&mute=1&modestbranding=1&iv_load_policy=3");
