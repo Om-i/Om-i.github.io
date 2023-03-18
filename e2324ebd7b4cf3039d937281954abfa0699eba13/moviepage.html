@@ -12,182 +12,173 @@
         <script src="html/imports.js" async></script>
     </head>
     <body>
-        <aside>stored in html/imports.html</aside>
+        <aside></aside><!--stored in html/imports.html-->
         <div class="main-container">
-            <header>stored in html/imports.html</header>
+            <header>Loading...</header><!--stored in html/imports.html-->
             <nav> <!-- button tag uses javascript to use the href -->
                 <button onclick="changeHash(-1);" type="button">Previous</button>
                 <button onclick="location.href = 'index.html'" type="button">Home</button>
                 <button onclick="changeHash(1);" type="button">Next</button>
             </nav>
             <div class="dynamic">
-                <picture class="background"></picture>
+                <div class="background"></div>
                 <section class="title">
-                    <h2><b>###</b></h2>
+                    <b>Loading...</b><!--imported from xml-->
                 </section>
-                <section class="image-container">
-                    <img alt="Poster">
+                <section class="image">
+                    <img src="imported from xml" alt="Movie Poster" />
                 </section>
-                <section> 
-                    <article class="description">
-                        <b>###</b>
-                    </article>
-                </section> 
+                <section class="description">
+                    <b>Loading...</b><!--imported from xml-->
+                </section>
                 <section class="booking">
-                    <h4><button id="bookbutton" onclick="showForm()">BOOK NOW!</button></h4>
+                    <button id="bookbutton" onclick="showForm()">BOOK NOW!</button>
                     <!-- as soon as the form is submitted it will pass the input to the php file, then it will run the js function-->
+                    <!-- The return keyword in the onsubmit attribute is important, as it prevents the form to be sent to the server-->
                     <form name="booking" method="post" action="php/post2sql.php" onsubmit="return bookingValidation()">
-                        <input type="text" placeholder="Your Name" name="name" required>
-                        <input type="text" placeholder="Your Email" name="email" required>
-                        <input id="date" type="date" name="date" required>
+                        <input type="text" placeholder="Your Name" name="name" />
+                        <input type="text" placeholder="Your Email" name="email" />
+                        <input id="date" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" placeholder="Screening Date" name="date" /> <!--the js in the onfocus attribute allows for a placeholder on date-->
                         <button type="submit">Book</button>
                         <div>
-                            Thanks for booking with us, Thanks for booking with us, Thanks for booking with us, Thanks for booking with us, Thanks for booking with us
+                            Here can insert your Name, Email and Date of the screening you would like to book. Thanks for choosing MovieTube!
                         </div>
                     </form>
                 </section>
                 <section class="video">
                     <div class="iframe-container">
-                        <!-- interaction with youtube api is made through the url -->
+                        <!-- imported from xml -->
                         <iframe
-                            src="###" allowfullscreen>
+                            src="imported from xml" allowfullscreen>
                         </iframe>
-                        <div>
-                            </section>
-                        </div>
-                        <footer>stored in html/imports.html</footer>
                     </div>
-                    <script>
-                        /*
-                         */
-                        onload = function () {
-                            changeContent();
-                        };
-                        onhashchange = function () {
-                            changeContent();
-                        };
-                        /*
-                         */
-                        function changeContent() {
-                            moviepageXml('.title h2 b', 'mtitle');
-                            moviepageXml('.description b', 'description');
-                            moviepageXml('.background', 'image');
-                            moviepageXml('.image-container img', 'image');
-                            moviepageXml('.iframe-container iframe', 'video');
+                </section>
+            </div>
+            <footer>Loading...</footer><!--stored in html/imports.html-->
+        </div>
+        <script>
+            /*
+             * Assigns today's date in ISO format to the minimum date attribute
+             * Date() returns today's date, 
+             */
+//            $('#date').attr("min", new Date().toISOString().substring(0, 10));
+            $('#date').attr("min", new Date().toISOString().split("T")[0]);
+            /*
+             * Adds the .blur class to input after an onBlur event
+             * This is because css has a :focus selector but not a :blur one
+             */
+            $('input').blur(function () {
+                $(this).addClass("blur");
+            });
+            /*
+             * Changes the content dynamically by calling moviepageXml()
+             * multiple times with different parameters
+             * The function is called 
+             */
+            onload = onhashchange = function () {
+                moviePageXml('.title b', 'mtitle');
+                moviePageXml('.description b', 'description');
+                moviePageXml('.background', 'image');
+                moviePageXml('.image img', 'image');
+                moviePageXml('.iframe-container iframe', 'video');
+            };
+            /*
+             * Use left and right arrow keys to navigate in the movie page
+             */
+            $(document).keydown(function (e) {
+                if (e.which === 37) {
+                    changeHash(-1);
+                } else if (e.which === 39) {
+                    changeHash(1);
+                }
+            });
+            /*
+             * Hide booking form on click outside the window
+             */
+            $(document).click(function (eventObj) { // .click() parameter is a function that passes an Event Object
+                const clicked = $(eventObj.target); // the target of the event object is the clicked element
+                const form = ".booking > form";     // form selector
+                /* .closest() returns the first ancestor of (selector) type
+                 * .length > 0 is commonly used in jquery to check if an element exists
+                 */
+                if (clicked.closest(form).length === 0 && !clicked.is('#bookbutton')) { // if the clicked element doesn't have a (form) ancestor and is not the #bookbutton
+                    // if([0].nodeName!="BUTTON")
+                    $(form).hide();
+                }
+            });
+            /**
+             * Imports the xml document and populates the selected container
+             * with the xml element relative to the movie id.
+             * Asyncronous Ajax Call, similar to XMLHttpRequest
+             * @param {String} selector
+             * @param {String} tag
+             * @returns {undefined}
+             */
+            function moviePageXml(selector, tag) {
+                $.ajax({// see specification on https://api.jquery.com/jquery.ajax/
+                    url: 'xml/movielist.xml',
+                    success: function (xml) {
+                        /* start asyncronous call */
+                        const id = +location.hash.substring(1);                  // take the current url id (hash), '+' sign casts string to integer
+                        const content = $(xml).find(tag).eq(id - 1).text();      // take the xml doc, find the tag corresponding to the current id and return it's content
+                        const sel = $(selector);                                 // take the jquery selector
+                        if (sel.is('.background')) {                             // if the background is selected
+                            sel.css('background-image', 'url(' + content + ')'); // change the background image url with the one in the xml
+                        } else if (sel.is('img')) {                              // if the poster is selected
+                            sel.attr("src", content);                            // change the source with the one in the xml
+                        } else if (sel.is('iframe')) {                           // if the trailer is selected
+                            sel.attr("src", content + // Add to the source the youtube video id stored in the xml
+                                    "?autoplay=1&mute=1&modestbranding=1&iv_load_policy=3&rel=0"); // append some parameters for the youtube api
+                        } else {
+                            sel.html(content);                                   // change the content of the tag
                         }
-
-                        function moviepageXml(selector, tag) {
-                            $.ajax({// see specification on https://api.jquery.com/jquery.ajax/
-                                url: 'xml/movielist2.xml',
-                                success: function (xml) {
-                                    /* start asyncronous call */
-                                    var id = +location.hash.substring(1);
-                                    var content = $(xml).find(tag).eq(id - 1).text();
-                                    var sel = $(selector);
-                                    if (sel.is('.background')){
-                                        sel.css('background-image','url('+content+')');
-                                    } else if (sel.is('img')) {
-                                        sel.attr("src", content);
-                                    } else if (sel.is('iframe')) {
-                                        sel.attr("src", content + "?autoplay=1&mute=1&modestbranding=1&iv_load_policy=3");
-                                    } else {
-                                        sel.html(content);
-                                    }
-                                    /* end asyncronous call */
-                                }
-                            });
-                        }
-
-
-                        //alert(window.location.hash);
-                        //top.location.hash = 1;
-                        //parent.location.hash = 1;
-                        //window.location.hash = 1;
-                        //location.hash = 1; // equals window.location.hash
-                        //alert(location.pathname)
-
-
-                        /*
-                         * URL HASHES
-                         * do not require a page refresh
-                         */
-                        function changeHash(offset = 1) {         // parameter is set to 1 by default if not specified (not required)
-                            var x = +location.hash.substring(1); // get the hash and remove the # symbol, the leading '+' casts the string to an integer
-                            if (x+offset<1||4<x+offset){ // if the result would go beyond the range of movies
-                                return; // stop function
-                            }
-                            if (isNaN(x)) {
-                                return location.hash = 1;        // if the hash is not a number, set the hash to 1 and exit the function
-                            }
-                            location.hash = x + offset;          // move to the new hash in accordance with the offset
-                        }
-
-
-
-
-
-
-
-
-
-
-                        /*
-                         * QUERY STRING JS
-                         */
-                        //            function getId() {
-                        //                return new URL(window.location).searchParams.get("id");
-                        //            }
-                        //
-                        //            function changeId(offset = 0) {              // default paremeter value, to avoid NaN output
-                        //                var url = new URL(window.location);
-                        //                var id = +url.searchParams.get("id");  // id is a string, leading '+' casts string to integer
-                        //                url.searchParams.set("id", id + offset);
-                        //                return url.href;
-                        //            }
-
-
-
-                        //                if (id === undefined && !!getId) { // .get("id") returns null if no id is present, !! casts null to false
-                        //
-                        //                }
-
-
-
-
-
-
-
-
-                        /*
-                         * XML JQUERY
-                         */
-                        //            var title;
-                        //            var description;
-                        //            var image;
-                        //            var video;
-
-                        //            /*
-                        //             * function xml()
-                        //             * Imports the xml document and allows to pass it as parameter to any function.
-                        //             */
-                        //            function xml(path, functionPassedAsParameter, tag, selector) {
-                        //                $.ajax({// see specification on https://api.jquery.com/jquery.ajax/
-                        //                    url: path,
-                        //                    success: function (xml) {
-                        //                        functionPassedAsParameter(xml, tag, selector);
-                        //                    }
-                        //                });
-                        //            }
-                        //            /*
-                        //             * function loadData() is a xml parsing function.
-                        //             * Populates the selected container with the xml element relative to the movie id.
-                        //             */
-                        //            function loadData(xml, tag, selector) {
-                        //                var id = location.hash.substring(1);
-                        //                var content = $(xml).find(tag).eq(id - 1).text(); // .eq() is a 0-based index
-                        //                $(selector).html(content); // replaces content
-                        ////                $(selector).append(content); // adds to the present content
-                        //            }
-                    </script>
-                    </body>
-                    </html>
+                        /* end asyncronous call */
+                    }
+                });
+            }
+            /**
+             * Changes the hash in the url by the amount specified in the offset
+             * @param {Number} offset
+             * @returns {undefined}
+             */
+            function changeHash(offset) {                      // parameter can be set to 1 by default with (offset = 1)
+                const x = +location.hash.substring(1) + offset; // get the hash and remove the # symbol (the leading '+' casts the string to an integer). Add the offset
+                if (x < 1 || 4 < x) {                           // if the result would go beyond the range of movies
+                    return;                                     // stop function
+                }
+                if (isNaN(x)) {                                 // if the hash is not a number (it shouldn't happen anyway)
+                    return location.hash = 1;                   // set the hash to 1 and exit the function
+                }
+                location.hash = x;                              // move to the new hash based on the offset
+            }
+            /**
+             * Booking overlay
+             * @returns {undefined}
+             */
+            function showForm() {
+                $('.booking > form').slideDown(); // element is not hidden, but this animates the visibility attribute
+                // tweak to hide overlay while loading, while i find a way to set a page loader
+                $('.booking > form').css("visibility", "visible");
+                //    document.querySelector('.booking > form').classList.add(".overlay");
+            }
+            /**
+             * Checks if the input is valid
+             * @returns {Boolean}
+             */
+            function bookingValidation() {
+                const name = document.forms["booking"]["name"].value; // Select form by name and input by name, return the input value
+                const email = document.forms["booking"]["email"].value;
+                const date = document.forms["booking"]["date"].value;
+                const pattern = /.+@.+\..+/i;                         // RegEx: "Select 3 strings separated by an @ and a dot"
+                if (name == 0 || date == 0) {                         // If name or date value are empty
+                    alert("All entries must be filled...");
+                    return false;
+                }
+                if (!pattern.test(email)) {                           // If email value doesn't match the RegEx criteria
+                    alert("Invalid email, retry...");
+                    return false;
+                }
+            }
+        </script>
+    </body>
+</html>

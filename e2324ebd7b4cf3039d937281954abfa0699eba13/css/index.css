@@ -10,22 +10,12 @@ NOTE
     (*) any selector
 */
 /*
-Hidden class will be used to manage dynamic content
-*/
-.hidden {display: none !important;}
-/*
 Font Import
 */
 @font-face {
     font-family: 'Exo';
     src: url(https://fonts.gstatic.com/s/exo/v20/4UaZrEtFpBI4f1ZSIK9d4LjJ4lM3OwRmOw.woff2) format('woff2');
 }
-/*Header Styles*/
-h2{
-    padding-top: 0.5rem;
-    margin-top: 0;
-}
-h4{margin:0;}
 /*
 ROOT
 */
@@ -41,37 +31,39 @@ html {
     color: white;
 }
 body{
-    display: flex; /* makes width spacing responsive, plus allows the use of justify-content */
+    display: flex;           /* makes width spacing responsive, plus allows the use of justify-content */
     background-image: url("https://i.imgur.com/JYQBHvb.jpeg");
-    background-size: cover; /* image covers whole container, it may be cut */
-    /*margin:0;*/ /*removes extreme borders*/
+    background-size: cover;  /* image covers whole container, it may be cut */
+    /*margin:0;*/            /*removes extreme borders*/
     justify-content: center; /*centers children (.main-container), requires flex*/
 }
 /*
 SIDEBAR
 */
 aside{
-    border-radius:1rem;
-    position: fixed;  /* allows overlapping */
-    width: 0.33rem; /* width of the default body margin*/
-    height: calc(100vh - 0.67rem); /* max height */
-    left:0; /* moves sidebar outside default body margin */
-    overflow: hidden;  /*cut text*/
+    position: fixed;                 /* allows overlapping */
+    width: 0.33rem;                  /* width of the default body margin*/
+    height: calc(100vh - 0.67rem);   /* max height */
+    left:0;                          /* moves sidebar outside default body margin */
+    overflow: hidden;                /*cut text*/
     /*white-space: nowrap;*/
     background-color: rgba(0,0,0,0); /*invisible, not required*/
     z-index:1;
 }
 .sidecontent{display: none;} /* hide content when sidebar is closed */
+
 aside:hover > .sidecontent{
     display: block; /* display side content when hovering sidebar */
-    height: 100vh; /* display background color along the screen height */
-    background-color: darkslategray;
+    height: 100vh;  /* display background color along the screen height */
+    background-color: rgba(0,0,0,0.5);
+    border:ridge;
+    border-color: darkslategray;
+    border-radius:1rem; /* rounds the borders of the container */
 }
 .sidecontent > ul {text-align: left;}
 ul{
-    padding: 1rem; /*removes list indentation*/
+    padding: 1rem;    /*removes list indentation*/
     list-style: none; /*removes bullet points*/
-    /*font-weight: bold;*/
 }
 li > a{
     /*text-decoration: none;*/ /*removes underline from links*/
@@ -82,8 +74,8 @@ li > a{
 MAIN
 */
 .main-container{
-    width: 50rem;
-    max-width:100%;
+    width: 50rem; /* width is proportional to the character size */
+    /*max-width:100%;*/
     /*margin:auto;*/
     /*width: calc(100% - 6rem);*/
 }
@@ -91,14 +83,14 @@ MAIN
 /*
 HEADER
 */
-header{font-size: 2rem;}
+header{font-size: 3rem;}
 header, footer{
     /* -> transparent to color to transparent*/
     background-image: linear-gradient(to right, rgba(0,0,0,0), darkslategray, rgba(0,0,0,0));
 }
 nav{
-    display:flex;
-    justify-content: space-evenly;
+    display:flex;                  /* sets the content inline and adjusts the position to the width adaptively */
+    justify-content: space-evenly; /* sets an even spacing between the children */
     margin-top:0.5rem;
     margin-bottom:0.5rem;
 }
@@ -142,7 +134,7 @@ button:hover:after{
 /* Shiny Button Frame */
 #bookbutton:before {
     position: absolute; /* overlap parent */
-    content: ''; /* create container */
+    content:""; /* create container */
     top: -1rem; /* vertical repositioning */
     left: -1rem; /* horizontal repositioning */
     width: 25%;
@@ -162,15 +154,9 @@ button:hover:after{
     }
 }
 
+
 /*
-INDEX CONTENT
-*/
-/*#static > section{
-    max-width: 100%;
-    overflow-x:auto;  enable horizontal scroll if necessary 
-}*/
-/*
-MOVIE PAGE CONTENT
+CONTENT
 */
 /*
 Absolute positioning requires parent to be declared non-static.
@@ -186,17 +172,18 @@ https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
     height: 100%; /* required for empty div */
     width: 100%; /* required for empty div */
     background-image: url("https://i.imgur.com/JYQBHvb.jpeg");
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     filter:brightness(50%); /* darken image, div should be empty */
     background-size: 100%; /* stretch width to container size (height is the second parameter, default is auto) */
     z-index: -1; /* place behind */
 }
 .dynamic{
     display: grid;
-    /*gap: 1rem;*/
+    gap: 0.2rem; /* avoids borders overlapping */
     /*grid-auto-columns: fit-content;*/
     /*grid-template-columns: auto auto;*/
     position: relative; /* required for background absolute positioning */
+    padding-bottom:0.3rem;
 }
 /* reserved for grid tweaks on sections */
 .dynamic > *:nth-child(2){ /* among all elements child of the dynamic class, take the first */
@@ -212,54 +199,60 @@ https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
     margin-bottom:1rem;
 }
 #mytable{
-    overflow: auto;
-    margin:auto;
-    /*background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));*/
-    background-color: rgba(0,0,0,0.5);
-    /**/
-    border:ridge;
-    border-color: darkslategray;
-    /*border: 1px solid silver;*/
-    /*border-left-width: 0;*/
-    /*border-collapse: separate;*/
-    /*border-spacing: 0;*/
-    border-radius: 1rem;
+    margin:auto; /* keeps the table label centered */
+}
+caption{
+    font-size: 1.25rem;
+    font-style: italic;
 }
 tr:not(#rowheader):hover{ /* selects table rows that dont have the rowheader id  and applies the style on mouse hovering */
     cursor:pointer;
     background-color: darkslategray;
 }
-
 th, td{
     padding:0.25rem;
     border:ridge;
     border-color: darkslategray;
 }
-th + th, td + td{border-left: 0 none;} /* vertical borders are not doubled */
+th + th, td + td{border-left: 0;}  /*vertical borders are not doubled*/ 
 
 th{text-align:center;}
 th:first-child{border-radius: 0.85rem 0 0 0;}
 th:last-child{border-radius:0 0.85rem 0 0;}
 
-td{text-align: justify;}
+td{text-align: left;}
 tr:last-child > td:first-child{border-radius:0 0 0 0.85rem;}
 tr:last-child > td:last-child{border-radius:0 0 0.85rem 0;}
 
-.image-container{
+.title{
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-image: linear-gradient(rgba(0,0,0,0), black, rgba(0,0,0,0));
+}
+.image{
     /*display:flex;*/
     /*align-items: end;*/
     /*padding-left: 1rem;*/
 }
 img{
+    border:ridge;
+    border-color:darkslategray;
     border-radius:1rem;
     max-width: 100%; /* prevents the image to show in its natural size */
+    
     /*height:100%;*/
     /*note: img are inline elements and they dont touch the bottom of the container*/
     /*vertical-align:sub; */ /* REMOVES DESCENDER SPACE*/
 }
-article{
+.description{
     text-align: justify;
-    padding: 1rem
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.5);
+    border:ridge;
+    border-color: darkslategray;
+    border-radius: 1rem;
 }
 /*
 booking section
@@ -279,25 +272,32 @@ booking section
     top: 50%; /* half screen height distance */
     transform: translate(-50%, -50%); /* move up and left half the size of the element*/
     /*background-color: slategray;*/
-    background-color: rgba(0,0,0,0.75);
+    background-color: rgba(0,0,0,0.85);
     border-style: ridge;
     border-color: darkslategray;
     z-index:1;
 }
-.booking > form > *:nth-child(1){width:7rem;}
-.booking > form > *:nth-child(2){width:7rem;}
-.booking > form > *:nth-child(3){width:7rem;}
+.booking > form > *:nth-child(1){}
+.booking > form > *:nth-child(2){}
+.booking > form > *:nth-child(3){}
 .booking > form > *:nth-child(5){
     /*min-width:6rem;*/
     grid-column: 2; /* place element in the right column */
-    grid-row: 1/6; /* element spans throught entire column */
+    grid-row: 1/5; /* element spans throught entire column */
+}
+input.blur:invalid{ /* checks invalid input after the blur class is added (done in jquery) */
+    border:ridge;
+    border-color:red;
 }
 /*
 iframe section, responsive
 */
 .video{
+    border: ridge;
+    border-color: darkslategray;
+    border-radius: 0 0 1rem 1rem;
     overflow: hidden;
-    padding-top:12.77%; /* title height size (might need a fix) */
+    padding-top:12.4%; /* title height size (might need a fix) */
     /*max-width: 100%;*/
 }
 .iframe-container{
@@ -308,8 +308,7 @@ iframe section, responsive
     top:-45%;
 }
 iframe{
-    border:none;
-    border-radius: 0 0 1rem 1rem;
+    border: none;
     position: absolute; /*out of flow*/
     left: 0;
     bottom: 0;
@@ -321,14 +320,15 @@ iframe{
    RESPONSIVE DESIGN
 */
 @media (max-width: 590px) {
-    #mytable, .description, button:not(#bookbutton), input, select{font-size: 3.5vw;} /*text size proportional to viewport width*/
+    #mytable, .description, button:not(#bookbutton), input, select, footer{font-size: 3.5vw;} /*text size proportional to viewport width*/
     .booking > form > *:nth-child(5){grid-column:1;}
     .dynamic{
         display:block;
         margin-top: 0;
     }
-    .image-container{display: none;}
-    .description{padding-top: 4rem;}
+    .image{display: none;}
+    .description{margin-top: 4rem;}
+    .video{padding-top:0;}
 }
 
 /*.column{
