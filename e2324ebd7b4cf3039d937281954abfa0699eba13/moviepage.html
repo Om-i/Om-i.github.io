@@ -35,10 +35,11 @@
                     <button id="bookbutton" onclick="showForm()">BOOK NOW!</button>
                     <!-- as soon as the form is submitted it will pass the input to the php file, then it will run the js function-->
                     <!-- The return keyword in the onsubmit attribute is important, as it prevents the form to be sent to the server-->
-                    <form name="booking" method="post" action="php/post2sql.php" target="_blank"> <!--onsubmit="return bookingValidation()"-->
+                    <form name="booking" method="POST" action="php/post2sql.php"> <!-- onsubmit="return bookingValidation()" -->
                         <span><input name="name" type="text" placeholder="Your Name" /></span> <!-- the 'required' attribute could be used for validation but is not mobile friendly -->
                         <span><input name="email" type="text" placeholder="Your Email" /></span>
                         <span><input name="date" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" placeholder="Screening Date" /></span> <!--the js in the onfocus attribute allows for a placeholder on date-->
+                        <span><input name="title" type="hidden" value="NOT_RECEIVED" /></span> <!-- this value will be replaced with jQuery -->
                         <button type="submit">Book</button>
                         <div id="comment">
                             Here you can insert your Name, Email and Date of the screening you would like to book. Thanks for choosing ShowCase Cinemas!

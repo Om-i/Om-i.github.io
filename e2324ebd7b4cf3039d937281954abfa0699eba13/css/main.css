@@ -265,7 +265,7 @@ booking section
     visibility: hidden; /* small tweak while i figure out a page loader */
     display:grid;
     padding: 1rem;
-    gap:1rem; /* spacing between grid elements */
+    gap:2rem; /* spacing between grid elements */
     /* grid-template-columns: 35%;*/
     align-items:center;
     position:fixed; /* position relative to root instead of parent */
@@ -280,7 +280,8 @@ booking section
     border-color: darkslategray;
     z-index:1;
 }
-.booking > form > *:nth-child(5){ /* #comment */
+.booking > form > *:nth-child(4){display:none;} /* gide the gap left by the hidden input */
+.booking > form > *:nth-child(6){ /* #comment */
     /*min-width:6rem;*/
     grid-column: 2; /* place element in the right column */
     grid-row: 1/5; /* element spans throught entire column */
@@ -297,7 +298,7 @@ booking section
     content:"Invalid Entry";
     right: 0; /* align text to the right */
     color:red;
-    top:100%; /* move text under the input field */
+    top:110%; /* move text under the input field */
 }
 /*
 iframe section, responsive

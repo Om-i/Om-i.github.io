@@ -119,6 +119,8 @@
                         event.preventDefault();
                     }
                 });
+                // Add a value attribute to the hidden title form containing the title shown in the current page.
+                $('input[name="title"]').attr('value', $('.title b').text());
             });
             /**
              * Validation function
@@ -126,17 +128,14 @@
              * @returns {Boolean}
              */
             function validate(input) {
-                const email = $('input[name="email"]');                     // email input selector
-                const isValid = /.+@.+\..+/i.test(email.val());             // compares the email input value with the following RegEx: "Select 3 strings separated by an @ and a dot, case insensitive" 
-                if (input.is(email) && isValid) {                           // if input name is email and it matches the regex
-//                    return input.removeAttr('style');                       // clear red highlight and stop
-                    return input.parent().removeClass('alert');                       // clear red highlight and stop
-                } else if (!input.is(email) && input.val() != 0) {          // if input name is not email but is non empty
-//                    return input.removeAttr('style');                       // clear red highlight and stop
-                    return input.parent().removeClass('alert');                       // clear red highlight and stop
+                const email = $('input[name="email"]');            // email input selector
+                const isValid = /.+@.+\..+/i.test(email.val());    // compares the email input value with the following RegEx: "Select 3 strings separated by an @ and a dot, case insensitive" 
+                if (input.is(email) && isValid) {                  // if input name is email and it matches the regex
+                    return input.parent().removeClass('alert');    // clear red highlight and stop
+                } else if (!input.is(email) && input.val() != 0) { // if input name is not email but is non empty
+                    return input.parent().removeClass('alert');    // clear red highlight and stop
                 } else {
-//                    input.attr('style', 'border:ridge;border-color:red;');  // apply red highlight
-                    input.parent().addClass('alert');  // apply red highlight
+                    input.parent().addClass('alert');              // apply red highlight
                     return false;
                 }
             }
