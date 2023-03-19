@@ -270,7 +270,7 @@ booking section
     align-items:center;
     position:fixed; /* position relative to root instead of parent */
     width:75vw;
-    height:75vh;
+    /*height:75vh;*/
     left: 50%; /* half screen width distance */
     top: 50%; /* half screen height distance */
     transform: translate(-50%, -50%); /* move up and left half the size of the element*/

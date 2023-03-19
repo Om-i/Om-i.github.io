@@ -27,8 +27,8 @@
                 const form = ".booking > form";     // form selector
                 // .closest() returns the first ancestor of (selector) type
                 // .length == 0 is commonly used in jQuery to check if an element doesn't exists
-                if (clicked.closest(form).length == 0 && !clicked.is('#bookbutton')) { // if the clicked element doesn't have a (form) ancestor and is not the #bookbutton
-                    // if([0].nodeName!="BUTTON")
+                if (!clicked.is('input') && !clicked.is('button')) { // if the clicked element doesn't have a (form) ancestor and is not the #bookbutton
+                    // clicked.closest(form).length == 0 && !clicked.is('#bookbutton') // or clicked[0].nodeName!="BUTTON"
                     $(form).hide();
                 }
             });
