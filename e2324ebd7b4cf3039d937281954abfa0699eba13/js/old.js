@@ -1,25 +1,3 @@
-/*
- * As soon as the document is loaded
- */
-$(document).ready(function () {
-    /*
-     * sidebar slide animation
-     */
-    $("aside").hover(function () {
-        $(this).stop().animate({width: rem2px(6)}); // stop() interrupts the animation as the mouse moves away
-    }, function () {
-        $(this).stop().width(rem2px(0.33));
-    });
-});
-
-/*
- * converts rem units to current viewport pixels since javascript doesn't accept relative units.
- * Used in sidebar js.
- */
-function rem2px(rem) {
-    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
-}
-
 /* xml call js version*/
 //window.addEventListener("load", function () {
 //    getMovieList();
@@ -75,3 +53,23 @@ function rem2px(rem) {
 //                if (id === undefined && !!getId) { // .get("id") returns null if no id is present, !! casts null to false
 //
 //                }
+
+
+/**
+ * Checks if the input is valid
+ * @returns {Boolean}
+ */
+//            function bookingValidation() {
+//                const name = document.forms["booking"]["name"].value; // Select form by name and input by name, return the input value
+//                const email = document.forms["booking"]["email"].value;
+//                const date = document.forms["booking"]["date"].value;
+//                const pattern = /.+@.+\..+/i;                         // RegEx: "Select 3 strings separated by an @ and a dot"
+//                if (name == 0 || date == 0) {                         // If name or date value are empty
+//                    alert("All entries must be filled...");
+//                    return false;
+//                }
+//                if (!pattern.test(email)) {                           // If email value doesn't match the RegEx criteria
+//                    alert("Invalid email, retry...");
+//                    return false;
+//                }
+//            }

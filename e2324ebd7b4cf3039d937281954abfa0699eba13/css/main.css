@@ -54,7 +54,7 @@ aside{
 
 aside:hover > .sidecontent{
     display: block; /* display side content when hovering sidebar */
-    height: 100vh;  /* display background color along the screen height */
+    height: 97vh;  /* display background along the screen height */
     background-color: rgba(0,0,0,0.5);
     border:ridge;
     border-color: darkslategray;
@@ -105,6 +105,8 @@ button, input, select{
 }
 input{
     border-radius: 1rem;
+    box-sizing: border-box; /* prevents overflow outside wrapper caused by the padding */
+    width:100%;             /* takes the width of the wrapper */
 }
 button{
     border-radius:1rem;
@@ -194,9 +196,10 @@ https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
 }
 
 /* Listing */
-.filter{
+#filter{
     margin-top:1rem;
     margin-bottom:1rem;
+    width: auto; /* reverts width inherited by input */
 }
 #mytable{
     margin:auto; /* keeps the table label centered */
@@ -277,17 +280,24 @@ booking section
     border-color: darkslategray;
     z-index:1;
 }
-.booking > form > *:nth-child(1){}
-.booking > form > *:nth-child(2){}
-.booking > form > *:nth-child(3){}
-.booking > form > *:nth-child(5){
+.booking > form > *:nth-child(5){ /* #comment */
     /*min-width:6rem;*/
     grid-column: 2; /* place element in the right column */
     grid-row: 1/5; /* element spans throught entire column */
+    text-align: justify;
 }
-input.blur:invalid{ /* checks invalid input after the blur class is added (done in jquery) */
+.alert{ /* border highliting applied by jQuery when validation is not passed */
+    position:relative;
     border:ridge;
+    border-radius: 1rem;
     border-color:red;
+}
+.alert:before{ /* warning text associated with the border highlighting */
+    position:absolute;
+    content:"Invalid Entry";
+    right: 0; /* align text to the right */
+    color:red;
+    top:100%; /* move text under the input field */
 }
 /*
 iframe section, responsive
@@ -320,8 +330,16 @@ iframe{
    RESPONSIVE DESIGN
 */
 @media (max-width: 590px) {
-    #mytable, .description, button:not(#bookbutton), input, select, footer{font-size: 3.5vw;} /*text size proportional to viewport width*/
-    .booking > form > *:nth-child(5){grid-column:1;}
+    button:not(#bookbutton),
+    select,
+    #mytable,
+    .description,
+    .alert,
+    input,
+    #comment,
+    footer{font-size: 3.5vw;} /*text size proportional to viewport width*/
+    
+    #comment{grid-column:1;}
     .dynamic{
         display:block;
         margin-top: 0;
