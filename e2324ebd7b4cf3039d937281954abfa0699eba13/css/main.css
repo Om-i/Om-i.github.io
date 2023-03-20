@@ -355,7 +355,14 @@ iframe{
         transform: translate(-50%); /* move left half the size of the element, together with left centers the form */
     }
 }
-
+@media (max-height: 390px) {
+    .booking > form, input{
+        gap:0;  /* remove grid gap between elements */
+        max-height:100%; /* stay within the screen height */
+        font-size: 5vh; /* font size proportional to the viewport height */
+    }
+    
+}
 /*.column{
      vh = browser window height in % 
      rem = size of a large character 
