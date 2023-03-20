@@ -280,7 +280,7 @@ booking section
     border-color: darkslategray;
     z-index:1;
 }
-.booking > form > *:nth-child(4){display:none;} /* gide the gap left by the hidden input */
+.booking > form > *:nth-child(3){display:none;} /* gide the gap left by the hidden input */
 .booking > form > *:nth-child(6){ /* #comment */
     /*min-width:6rem;*/
     grid-column: 2; /* place element in the right column */
@@ -348,6 +348,12 @@ iframe{
     .image{display: none;}
     .description{margin-top: 4rem;}
     .video{padding-top:0;}
+    
+    .booking > form{
+        top: 10%;
+        left: 50%; /* half screen width distance */
+        transform: translate(-50%); /* move left half the size of the element, together with left centers the form */
+    }
 }
 
 /*.column{

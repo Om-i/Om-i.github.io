@@ -1,5 +1,8 @@
-# AddType application/x-httpd-php .html
+## Requests the server to parse HTML files as PHP
+## Used to import meta tags, also https://www.w3.org/TR/cooluris/#cooluris
+ AddType application/x-httpd-php .html .htm
 
+## Prevents 3rd party websites to embed this website
 #<IfModule mod_headers.c>
 #	Header set Content-Security-Policy "iframe-ancestors https://www.youtube.com"
 #</IfModule>

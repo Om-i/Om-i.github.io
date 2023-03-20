@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Movie Page</title>
+        <!--<?php include('php/nocache.php'); ?>--><!-- stops caching, php interpretation needs to be activated from .htaccess-->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes, viewport-fit=cover">
         <!--IMPORT CSS-->
@@ -38,8 +39,8 @@
                     <form name="booking" method="POST" action="php/post2sql.php"> <!-- onsubmit="return bookingValidation()" -->
                         <span><input name="name" type="text" placeholder="Your Name" /></span> <!-- the 'required' attribute could be used for validation but is not mobile friendly -->
                         <span><input name="email" type="text" placeholder="Your Email" /></span>
-                        <span><input name="date" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" placeholder="Screening Date" /></span> <!--the js in the onfocus attribute allows for a placeholder on date-->
                         <span><input name="title" type="hidden" value="NOT_RECEIVED" /></span> <!-- this value will be replaced with jQuery -->
+                        <span><input name="date" onfocus="(this.type = 'date')" placeholder="Screening Date" /></span> <!--the js in the onfocus attribute allows for a placeholder on date-->
                         <button type="submit">Book</button>
                         <div id="comment">
                             Here you can insert your Name, Email and Date of the screening you would like to book. Thanks for choosing ShowCase Cinemas!
