@@ -357,7 +357,7 @@ iframe{
 }
 @media (max-height: 390px) {
     .booking > form, input{
-        gap:0;  /* remove grid gap between elements */
+        gap:0.5rem;  /* remove grid gap between elements */
         max-height:100%; /* stay within the screen height */
         font-size: 5vh; /* font size proportional to the viewport height */
     }
