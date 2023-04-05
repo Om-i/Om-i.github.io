@@ -106,8 +106,14 @@ button, input, select{
 input{
     border-radius: 1rem;
     box-sizing: border-box; /* prevents overflow outside wrapper caused by the padding */
-    width:100%;             /* takes the width of the wrapper */
+    width:100%; /* takes the width of the wrapper */ 
 }
+#terms{ /* checkbox */
+    width:auto;
+    position:fixed; /* removed from flow, inherits screen height */
+    top:-100%; /* moved outside the screen */
+}
+
 button{
     border-radius:1rem;
     cursor: pointer; /*changes cursor to a hand*/
@@ -280,8 +286,8 @@ booking section
     border-color: darkslategray;
     z-index:1;
 }
-.booking > form > *:nth-child(3){display:none;} /* hide the gap left by the hidden input */
-.booking > form > *:nth-child(8){ /* #comment */
+.booking > #bform > *:nth-child(3){display:none;} /* hide the gap left by the hidden input */
+.booking > #bform > *:nth-child(8){ /* #comment */
     /*min-width:6rem;*/
     grid-column: 2; /* place element in the right column */
     grid-row: 1/7; /* element spans throught entire column */

@@ -8,7 +8,7 @@
         <!--IMPORT CSS FROM EXTERNAL FILE-->
         <link rel="stylesheet" href="css/main.css">
         <!--IMPORT JQUERY-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <!--IMPORT EXTERNAL HTML (HEADER, SIDEBAR, FOOTER)-->
         <script src="js/imports.js" defer></script>
         <script src="js/index.js" defer></script>
@@ -18,7 +18,16 @@
         <div class="main-container">
             <header>Loading...</header><!--stored in html/imports.html-->
             <nav>
-                <button onclick="location.href = 'moviepage.html#1'" type="button">Go to Movie Page</button>
+                <section class="booking">
+                    <button id="bookbutton" onclick="showForm();">Sign Up</button>
+                    <form id="rform" name="booking" method="POST" action="php/signup.php">
+                        <h2>Sign up now!</h2>
+                        <span><input name="email" type="text" placeholder="Email" required></span>
+                        <span><input name="password" type="password" placeholder="Password" required></span>
+                        <span id="terms"><input name="terms" type="checkbox" value="accept">I accept the terms of service.</span>
+                        <button type="submit">Register</button>
+                    </form>
+                </section>
             </nav>
             <div class="dynamic">
                 <div class="background"></div>
@@ -40,4 +49,43 @@
             <footer>Loading...</footer><!--stored in html/imports.html-->
         </div>
     </body>
+    <script>
+        /**
+         * Booking overlay
+         * @returns {undefined}
+         */
+        function showForm() {
+            $('.booking > form').slideDown(); // element is not hidden, but this animates the visibility attribute
+            // tweak to hide overlay while loading, while i find a way to set a page loader
+            $('.booking > form').css("visibility", "visible");
+            //    document.querySelector('.booking > form').classList.add(".overlay");
+        }
+        /*
+         * Run the validation on every input entry right before submission
+         * Stop the submission if the validation fails
+         */
+        $('.booking > form').submit(function (event) {
+            const email = $('input[name="email"]');            // email input selector
+            const isValid = /.+@.+\..+/i.test(email.val());    // compares the email input value with the following RegEx: "Select 3 strings separated by an @ and a dot, case insensitive" 
+            if (input.is(email) && isValid) {                  // if input name is email and it matches the regex
+                alert("Insert valid email");
+                event.preventDefault();
+            } else if ($('#terms > input').is(":checked")) {
+                alert("Bot check failed");
+                event.preventDefault();
+            } else {
+                alert("Bot check passed");
+            }
+        });
+        /*
+         * Hide booking form on click outside the window
+         */
+        $(document).click(function (eventObj) { // .click() parameter is a function that passes an Event Object
+            const clicked = $(eventObj.target); // the target of the event object is the clicked element
+            const form = ".booking > form";     // form selector
+            if (!clicked.is('input') && !clicked.is('button')) { // if the clicked element doesn't have a (form) ancestor and is not the #bookbutton
+                $(form).hide();
+            }
+        });
+    </script>
 </html>
