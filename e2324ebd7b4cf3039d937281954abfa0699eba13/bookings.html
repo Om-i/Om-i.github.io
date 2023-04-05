@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Booking List</title>
+        <!--<?php include('php/nocache.php'); ?>--><!-- stops caching, php interpretation needs to be activated from .htaccess-->
+        <meta charset="UTF-8"> <!-- enforces the use of UTF encoding for fonts -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes, viewport-fit=cover"> <!--Adapts the content to the device screen, covering the safe space as well-->
+        <!--IMPORT CSS FROM EXTERNAL FILE-->
+        <link rel="stylesheet" href="css/main.css">
+        <!--IMPORT JQUERY-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" defer></script>
+        <!--IMPORT EXTERNAL HTML (HEADER, SIDEBAR, FOOTER)-->
+        <script src="js/imports.js" defer></script>
+        <script src="js/index.js" defer></script>
+    </head>
+    <body>
+        <aside></aside><!--stored in html/imports.html-->
+        <div class="main-container">
+            <header>Loading...</header><!--stored in html/imports.html-->
+            <nav>
+                <button onclick="location.href = 'index.html'" type="button">Home</button>
+                <button onclick="location.href = 'moviepage.html#1'" type="button">Go to Movie Page</button>
+            </nav>
+            <div class="dynamic">
+                <div class="background"></div>
+                <section>
+                    <input id="filter" oninput="filter()" type="text" placeholder="Filter Screenings by...">
+                    <select id="dropdown"></select>
+                    <table id="mybookingtable">
+                        <caption>No results</caption><!--hidden onload-->
+                        <tr id='rowheader'>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                        </tr>
+                        <?php
+
+                        $con = mysqli_connect("localhost", "root", "", "wdca2023");
+                        
+                        if (mysqli_connect_errno()) {
+                        echo "Database is disconnected..: " . mysqli_connect_error();
+                        }
+
+                        $result = mysqli_query($con, "SELECT * FROM booking");
+
+                        while ($row = mysqli_fetch_array($result)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['bookingId'] . "</td>";
+                        echo "<td>" . $row['name'] . "</td>";
+                        echo "<td>" . $row['email'] . "</td>";
+                        echo "<td>" . $row['title'] . "</td>";
+                        echo "<td>" . $row['date'] . "</td>";
+                        echo "</tr>";
+                        }
+
+                        mysqli_close($con);
+                        ?>
+                    </table>
+                </section>
+            </div>
+            <footer>Loading...</footer><!--stored in html/imports.html-->
+        </div>
+    </body>
+</html>

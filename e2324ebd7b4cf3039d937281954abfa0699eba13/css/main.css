@@ -201,7 +201,7 @@ https://www.w3.org/TR/css-position-3/#absolute-positioning-containing-block
     margin-bottom:1rem;
     width: auto; /* reverts width inherited by input */
 }
-#mytable{
+#mytable, #mybookingtable{
     margin:auto; /* keeps the table label centered */
 }
 caption{
@@ -262,7 +262,7 @@ booking section
 */
 .booking{padding:1rem;}
 .booking > form{
-    visibility: hidden; /* small tweak while i figure out a page loader */
+    visibility: hidden; /* prevents script hiding delay */
     display:grid;
     padding: 1rem;
     gap:2rem; /* spacing between grid elements */
@@ -333,7 +333,7 @@ iframe{
 @media (max-width: 590px) {
     button:not(#bookbutton),
     select,
-    #mytable,
+    #mytable, #mybookingtable,
     .description,
     .alert,
     input,
@@ -350,9 +350,14 @@ iframe{
     .video{padding-top:0;}
     
     .booking > form{
-        top: 10%;
+        position:absolute;
+        top: 0%;
         left: 50%; /* half screen width distance */
         transform: translate(-50%); /* move left half the size of the element, together with left centers the form */
+    }
+    
+    .booking > form, input{
+        gap:0.5rem;  /* remove grid gap between elements */
     }
 }
 @media (max-height: 390px) {

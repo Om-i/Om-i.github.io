@@ -41,7 +41,7 @@
             function filter() {
                 const index = $('th:contains(' + $("option:selected").val() + ')').index(); // Index of the table header element that corresponds to the dropdown selection
                 const input = $("#filter").val().toLowerCase();                             // take the input value, parse it lowercase
-                $('#mytable tr:has(td)').each(function () {                                 // select all table rows that contain a td tag (no header) and loop through them
+                $('table tr:has(td)').each(function () {                                 // select all table rows that contain a td tag (no header) and loop through them
 //                    const row = $(this).text().toLowerCase();                             // take the table row, parse it as lowercase string of text
                     const row = $(this).children().eq(index).text().toLowerCase();          // table row child in (index) position, parse content lowercase
                     if (row.search(input) === -1) {                                         // if row doesn't return any index in accordance to the input (defaults to -1)
