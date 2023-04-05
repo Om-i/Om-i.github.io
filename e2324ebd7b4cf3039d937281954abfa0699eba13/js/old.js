@@ -22,9 +22,9 @@
 /* data import js version */
 //function tableRows(xmlDoc) {
 //    var entries = '';
-//    var column = xmlDoc.getElementsByTagName("movie"); // or xmlDoc.querySelector("[id^='_']");
+//    var column = xmlDoc.getElementsByTagName("movie"); // or xmlDoc.querySelectorAll("[id]"); to get all xml elements that have an id attribute
 //    for (var i = 0; i < column.length; i++) {
-//        entries += "<tr><td>" + column[i].id + "</td>";
+//        entries += "<tr><td>" + column[i].id + "</td>"; // .id gets the movie attribute 'id'
 //        var row = column[i].children; // column[i].childNodes; adds ancillary items
 //        for (var j = 0; j < row.length; j++) {
 //            entries += "<td>" + row[j].textContent + "</td>";
@@ -32,6 +32,7 @@
 //        entries += "</tr>";
 //    }
 //    document.getElementById("mytable").innerHTML += entries; // appends rows to table header
+////    document.getElementsByTagName("table")[0].innerHTML += entries; // same but doesn't use id selector
 //}
 
 /*

@@ -27,7 +27,7 @@
                     <b>Loading...</b><!--imported from xml-->
                 </section>
                 <section class="image">
-                    <img src="" alt="Movie Poster" /> <!--imported from xml-->
+                    <img src=" " alt="Movie Poster"> <!--imported from xml-->
                 </section>
                 <section class="description">
                     <b>Loading...</b><!--imported from xml-->
@@ -36,19 +36,20 @@
                     <button id="bookbutton" onclick="showForm()">BOOK NOW!</button>
                     <!-- as soon as the form is submitted it will pass the input to the php file, then it will run the js function-->
                     <!-- The return keyword in the onsubmit attribute is important, as it prevents the form to be sent to the server-->
-                    <form name="booking" method="POST" action="php/post2sql.php"> <!-- onsubmit="return bookingValidation()" -->
-                        <span><input name="name" type="text" placeholder="Your Name" /></span> <!-- the 'required' attribute could be used for validation but is not mobile friendly -->
-                        <span><input name="email" type="text" placeholder="Your Email" /></span>
-                        <span><input name="title" type="hidden" value="NOT_RECEIVED" /></span> <!-- this value will be replaced with jQuery -->
-                        <span><input name="date" onfocus="(this.type = 'date')" placeholder="Screening Date" /></span> <!--the js in the onfocus attribute allows for a placeholder on date-->
+                    <form name="booking" method="POST" action="php/post2sql.php" onsubmit="validateCaptcha()"> <!-- onsubmit="return bookingValidation()" -->
+                        <span><input name="name" type="text" placeholder="Your Name"></span> <!-- the 'required' attribute could be used for validation but is not mobile friendly -->
+                        <span><input name="email" type="text" placeholder="Your Email"></span>
+                        <span><input name="title" type="hidden" value="NOT_RECEIVED"></span> <!-- this value will be replaced with jQuery -->
+                        <span><input name="date" onfocus="(this.type = 'date')" placeholder="Screening Date"></span> <!--the js in the onfocus attribute allows for a placeholder on date-->
+                        <div id="captcha"></div><span><input type="text" placeholder="Captcha" id="cpatchaTextBox"/></span>
                         <button type="submit">Book</button>
                         <div id="comment">
                             Here you can insert your Name, Email and Date of the screening you would like to book. Thanks for choosing ShowCase Cinemas!
-                            <br />
-                            <br />
-                            National Amusements, Inc.<br />
-                            846 University Avenue<br />
-                            PO Box 9108<br />
+                            <br>
+                            <br>
+                            National Amusements, Inc.<br>
+                            846 University Avenue<br>
+                            PO Box 9108<br>
                             Norwood, MA 02062-9108
                         </div>
                     </form>
@@ -57,12 +58,53 @@
                     <div class="iframe-container">
                         <!-- imported from xml -->
                         <iframe
-                            src="" allowfullscreen>
+                            src=" " allowfullscreen>
                         </iframe>
                     </div>
                 </section>
             </div>
             <footer>Loading...</footer><!--stored in html/imports.html-->
         </div>
+        <script>
+            window.onload = createCaptcha();
+
+            var code;
+            function createCaptcha() {
+                //clear the contents of captcha div first 
+                document.getElementById('captcha').innerHTML = "";
+                var charsArray =
+                        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@!#$%^&*";
+                var lengthOtp = 6;
+                var captcha = [];
+                for (var i = 0; i < lengthOtp; i++) {
+                    //below code will not allow Repetition of Characters
+                    var index = Math.floor(Math.random() * charsArray.length + 1); //get the next character from the array
+                    if (captcha.indexOf(charsArray[index]) == -1)
+                        captcha.push(charsArray[index]);
+                    else
+                        i--;
+                }
+                var canv = document.createElement("canvas");
+                canv.id = "captcha";
+                canv.width = 100;
+                canv.height = 40;
+                var ctx = canv.getContext("2d");
+                ctx.font = "25px Georgia";
+                ctx.strokeText(captcha.join(""), 0, 30);
+                //storing captcha so that can validate you can save it somewhere else according to your specific requirements
+                code = captcha.join("");
+                document.getElementById("captcha").appendChild(canv); // adds the canvas to the body element
+            }
+            function validateCaptcha() {
+                debugger
+                if (document.getElementById("cpatchaTextBox").value == code) {
+                    alert("Valid Captcha")
+                } else {
+                    event.preventDefault();
+                    alert("Invalid Captcha. try Again");
+                    createCaptcha();
+                }
+            }
+        </script>
     </body>
 </html>

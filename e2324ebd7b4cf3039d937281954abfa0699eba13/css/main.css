@@ -280,11 +280,11 @@ booking section
     border-color: darkslategray;
     z-index:1;
 }
-.booking > form > *:nth-child(3){display:none;} /* gide the gap left by the hidden input */
-.booking > form > *:nth-child(6){ /* #comment */
+.booking > form > *:nth-child(3){display:none;} /* hide the gap left by the hidden input */
+.booking > form > *:nth-child(8){ /* #comment */
     /*min-width:6rem;*/
     grid-column: 2; /* place element in the right column */
-    grid-row: 1/5; /* element spans throught entire column */
+    grid-row: 1/7; /* element spans throught entire column */
     text-align: justify;
 }
 .alert{ /* border highliting applied by jQuery when validation is not passed */
@@ -363,6 +363,12 @@ iframe{
     }
     
 }
+
+#captcha{
+    background-color: white;
+    border-radius: 1rem;
+}
+
 /*.column{
      vh = browser window height in % 
      rem = size of a large character 
