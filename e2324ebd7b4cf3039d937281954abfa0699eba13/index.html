@@ -18,8 +18,8 @@
         <div class="main-container">
             <header>Loading...</header><!--stored in html/imports.html-->
             <nav>
-                <section class="booking">
-                    <button id="bookbutton" onclick="showForm();">Sign Up</button>
+                <section class="booking" style="width:100%; display:flex;justify-content: space-evenly;">
+                    <button id="signupbutton" onclick="showForm();">Sign Up</button>
                     <form id="rform" name="booking" method="POST" action="php/signup.php">
                         <h2>Sign up now!</h2>
                         <span><input name="email" type="text" placeholder="Email" required></span>
@@ -27,6 +27,7 @@
                         <span id="terms"><input name="terms" type="checkbox" value="accept">I accept the terms of service.</span>
                         <button type="submit">Register</button>
                     </form>
+                    <button onclick="location.href = 'bookings.html'" type="button">All Bookings</button>
                 </section>
             </nav>
             <div class="dynamic">

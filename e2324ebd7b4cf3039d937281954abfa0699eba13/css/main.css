@@ -140,7 +140,7 @@ button:hover:after{
     transition:0.8s; /*opacity animation*/
 }
 /* Shiny Button Frame */
-#bookbutton:before {
+#bookbutton:before, #signupbutton:before{
     position: absolute; /* overlap parent */
     content:""; /* create container */
     top: -1rem; /* vertical repositioning */
