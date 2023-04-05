@@ -346,7 +346,7 @@ iframe{
     #comment,
     footer{font-size: 3.5vw;} /*text size proportional to viewport width*/
     
-    #comment{grid-column:1;}
+    .booking > #bform > *:nth-child(8){grid-column:1;}
     .dynamic{
         display:block;
         margin-top: 0;
@@ -357,7 +357,7 @@ iframe{
     
     .booking > form{
         position:absolute;
-        top: 0%;
+        top: 25%;
         left: 50%; /* half screen width distance */
         transform: translate(-50%); /* move left half the size of the element, together with left centers the form */
     }

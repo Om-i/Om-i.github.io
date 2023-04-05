@@ -65,12 +65,12 @@
          * Stop the submission if the validation fails
          */
         $('.booking > form').submit(function (event) {
-            const email = $('input[name="email"]');            // email input selector
-            const isValid = /.+@.+\..+/i.test(email.val());    // compares the email input value with the following RegEx: "Select 3 strings separated by an @ and a dot, case insensitive" 
-            if (input.is(email) && isValid) {                  // if input name is email and it matches the regex
+            const email = $('input[name="email"]');          // email input selector
+            const isValid = /.+@.+\..+/i.test(email.val());  // compares the email input value with the following RegEx: "Select 3 strings separated by an @ and a dot, case insensitive" 
+            if (!isValid) {                                  // if input matches the regex
                 alert("Insert valid email");
                 event.preventDefault();
-            } else if ($('#terms > input').is(":checked")) {
+            } else if ($('#terms > input').is(":checked")) { // bot hidden check
                 alert("Bot check failed");
                 event.preventDefault();
             } else {
@@ -82,7 +82,7 @@
          */
         $(document).click(function (eventObj) { // .click() parameter is a function that passes an Event Object
             const clicked = $(eventObj.target); // the target of the event object is the clicked element
-            const form = ".booking > form";     // form selector
+            const form = ".booking > form"; // form selector
             if (!clicked.is('input') && !clicked.is('button')) { // if the clicked element doesn't have a (form) ancestor and is not the #bookbutton
                 $(form).hide();
             }
